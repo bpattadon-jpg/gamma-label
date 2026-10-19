@@ -188,6 +188,11 @@ p{margin:0}
 .wordmark .w2{font-size:clamp(36px,10.4vw,72px);letter-spacing:.02em;margin-top:2px;padding-left:.06em}
 .hero h1{font-size:clamp(23px,5.6vw,34px);font-weight:600;line-height:1.42;max-width:24ch}
 .nw{white-space:nowrap}
+/* ตัดบรรทัดภาษาไทยให้สวย: หัวข้อแบ่งบรรทัดให้ยาวใกล้กัน ย่อหน้าไม่ทิ้งคำเดียวไว้บรรทัดสุดท้าย */
+h1,h2,h3,summary,figcaption,.pool-foot p,.lbl-aside h2,.result-top .purpose,.status,.flag{text-wrap:balance}
+/* บรรทัดไม่ยาวเกินไปบนจอกว้าง อ่านง่ายขึ้น */
+.ans,.finder-foot,.result-note,.svc-note > span,.sec-head p{max-width:62ch}
+p,li,dd,.ans,.result-note,.finder-foot,.c-list div,.stat > span{text-wrap:pretty}
 .hero .lede{margin-top:14px;color:var(--ink-2);font-size:16.5px;max-width:52ch}
 .hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 
@@ -198,7 +203,7 @@ p{margin:0}
 .stat:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .stat b{display:block;font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:700;line-height:1.05;letter-spacing:-.01em;white-space:nowrap}
 .stat b sup{font-size:.5em;margin-left:1px}
-.stat span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.5;padding-bottom:12px}
+.stat > span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.5;padding-bottom:12px}
 
 /* pool panel */
 .pool{
@@ -361,7 +366,7 @@ section{position:relative}
 .status.done{background:#E3F7EE;color:#137A4B}
 
 /* faq */
-.faq{display:grid;gap:10px}
+.faq{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
 .faq details{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:0 18px}
 .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-weight:600;font-size:16.5px}
 .faq summary::-webkit-details-marker{display:none}
@@ -384,7 +389,7 @@ section{position:relative}
 .contact .org{margin-top:8px;color:#B9CBEA;font-size:15.5px}
 .c-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:0;border-top:1px solid rgba(159,183,224,.2)}
 .c-list li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid rgba(159,183,224,.2);font-size:15.5px}
-.c-list span{color:#8FA6DE;font-size:14px}
+.c-list li > span{color:#8FA6DE;font-size:14px}
 .c-list a{color:#fff;text-decoration-color:rgba(143,227,255,.5);text-underline-offset:3px}
 .c-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
 .c-actions .pill{width:100%}
@@ -761,7 +766,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       </figure>
       <figure class="ph" data-photo="loading">
         <span class="ph-art"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="10" y="18" width="20" height="20"/><rect x="34" y="18" width="20" height="20"/><rect x="22" y="2" width="20" height="16"/><path d="M6 42h52M10 42v8M32 42v8M54 42v8"/></svg></span>
-        <figcaption>พื้นที่รับและส่งสินค้า</figcaption>
+        <figcaption>พื้นที่รับส่งสินค้า</figcaption>
       </figure>
     </div>
   </div>
@@ -802,31 +807,31 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     </div>
     <div class="faq">
       <details open>
-        <summary>อาหารที่ผ่านการฉายรังสีมีรังสีตกค้างไหม<i aria-hidden="true"></i></summary>
+        <summary><span>อาหารที่ผ่านการฉายรังสีมีรังสีตกค้างไหม</span><i aria-hidden="true"></i></summary>
         <div class="ans">ไม่มี รังสีแกมมาผ่านสินค้าไปเหมือนแสงผ่านกระจก พลังงานไม่สูงพอทำให้สินค้ากลายเป็นสารกัมมันตรังสี เปรียบได้กับกระเป๋าที่ผ่านเครื่องเอกซเรย์ที่สนามบิน</div>
       </details>
       <details>
-        <summary>ต้องแกะบรรจุภัณฑ์ก่อนฉายไหม<i aria-hidden="true"></i></summary>
+        <summary><span>ต้องแกะบรรจุภัณฑ์ก่อนฉายไหม</span><i aria-hidden="true"></i></summary>
         <div class="ans">ไม่ต้อง รังสีทะลุผ่านกล่องได้ จึงฉายในบรรจุภัณฑ์สุดท้ายที่ปิดผนึกแล้ว ช่วยลดโอกาสปนเปื้อนซ้ำ ควรใช้บรรจุภัณฑ์ที่ทนรังสีได้ตามปริมาณที่ฉาย</div>
       </details>
       <details>
-        <summary>รสชาติและคุณค่าทางอาหารเปลี่ยนไปไหม<i aria-hidden="true"></i></summary>
+        <summary><span>รสชาติและคุณค่าทางอาหารเปลี่ยนไปไหม</span><i aria-hidden="true"></i></summary>
         <div class="ans">ที่ปริมาณรังสีที่ใช้ทั่วไป การเปลี่ยนแปลงมีน้อย ใกล้เคียงหรือน้อยกว่าการแปรรูปด้วยความร้อน องค์การอนามัยโลก (WHO) FAO และ IAEA ยืนยันความปลอดภัยของอาหารฉายรังสี</div>
       </details>
       <details>
-        <summary>อาหารฉายรังสีต้องติดฉลากอย่างไร<i aria-hidden="true"></i></summary>
+        <summary><span>อาหารฉายรังสีต้องติดฉลากอย่างไร</span><i aria-hidden="true"></i></summary>
         <div class="ans">อาหารที่ผ่านการฉายรังสีต้องแสดงข้อความและสัญลักษณ์บนฉลากตามประกาศกระทรวงสาธารณสุข เจ้าหน้าที่ให้คำแนะนำได้เมื่อยื่นคำขอ</div>
       </details>
       <details>
-        <summary>ส่งตัวอย่างงานวิจัยปริมาณน้อยได้ไหม<i aria-hidden="true"></i></summary>
+        <summary><span>ส่งตัวอย่างงานวิจัยปริมาณน้อยได้ไหม</span><i aria-hidden="true"></i></summary>
         <div class="ans">ได้ แจ้งชนิดตัวอย่าง จำนวน และปริมาณรังสีที่ต้องการ เจ้าหน้าที่จะช่วยวางแผนการฉายและการวัดปริมาณรังสีให้</div>
       </details>
       <details>
-        <summary>ต้องเตรียมข้อมูลอะไรบ้าง<i aria-hidden="true"></i></summary>
+        <summary><span>ต้องเตรียมข้อมูลอะไรบ้าง</span><i aria-hidden="true"></i></summary>
         <div class="ans">ชนิดสินค้า จำนวน ขนาดและน้ำหนักต่อกล่อง วัตถุประสงค์ของการฉาย และปริมาณรังสีที่ต้องการ (ถ้ามี) พร้อมแบบคำขอใช้บริการ</div>
       </details>
       <details>
-        <summary>ค่าบริการเท่าไร<i aria-hidden="true"></i></summary>
+        <summary><span>ค่าบริการเท่าไร</span><i aria-hidden="true"></i></summary>
         <div class="ans">ขึ้นกับจำนวนตู้ฉาย ปริมาณรังสี และชนิดงาน โทรหรือส่งอีเมลสอบถามอัตราล่าสุดได้ที่ช่องทางด้านล่าง</div>
       </details>
     </div>
@@ -1089,6 +1094,53 @@ function drawSticker(L, type){
 })();
 </script>
 <script>
+/* ---------- คำ/วลีที่ห้ามตัดกลางบรรทัด (Chrome ตัดคำไทยบางคำผิด เช่น ดอซิ|มิเตอร์, พา|เลท) ---------- */
+window.keepTogether = (function(){
+  const WORDS = [
+    'สถาบันเทคโนโลยี', 'นิวเคลียร์แห่งชาติ', '(องค์การมหาชน)', 'สาขาคลองห้า', 'ฝ่ายฉายรังสีแกมมา',
+    'สำนักงานปรมาณูเพื่อสันติ', '(ปส.)', 'องค์การอนามัยโลก', 'กระทรวงสาธารณสุข', 'คณะกรรมการอาหารและยา',
+    'ดอซิมิเตอร์', 'พาเลท', 'หน่วยงาน', 'กัมมันตรังสี', 'บรรจุภัณฑ์', 'จุลินทรีย์', 'กิโลเกรย์', 'กิโลกรัม',
+    'เครื่องมือแพทย์', 'ปริมาณรังสี', 'ฉายรังสีแกมมา', 'การฉายรังสี', 'ฉายรังสี', 'รังสีแกมมา', 'ต้นกำเนิดรังสี',
+    'โคบอลต์-60', 'ตกค้าง', 'ห้องฉาย', 'ตู้ฉาย', 'สินค้าเกษตร', 'ไหมไทย', 'เก็บรักษา', 'โรงเก็บ', 'แตกหน่อ',
+    'ใบรับรอง', 'ร้องขอ', 'ลูกค้า', 'ทั่วถึง', 'สนามบิน', 'การทำงาน', 'คำขอ', 'เอกสาร', 'นักศึกษา', 'นักวิจัย',
+    'เครื่องสำรวจรังสี', 'เครื่องวัดรังสี', 'ประจำตัว', 'วัตถุประสงค์', 'ความปลอดภัย', 'ประเทศคู่ค้า', 'สหรัฐอเมริกา',
+    'ซัลโมเนลลา', 'ตามชนิดงาน', 'แหล่งกำเนิดรังสี', 'แหล่งรังสี', 'ทุกด้าน', 'วัดได้จริง', 'สินค้าทั้งพาเลท', 'ช่องทางด้านล่าง', 'เมื่อลูกค้าร้องขอ', 'ปราศจากเชื้อ', 'รับส่งสินค้า', 'สินค้าอาหาร', 'อาหารสัตว์เลี้ยง', 'อาหารแปรรูป', 'ตัวอย่างงานวิจัย', 'งานวิจัย', 'เซริซิน', 'โปรตีน', 'นวัตกรรม',
+    'วันหยุดราชการ', 'เทคโนธานี', 'ตำบลคลองห้า', 'อำเภอคลองหลวง', 'จังหวัดปทุมธานี 12120', 'ปทุมธานี',
+    'ISO 11137', 'Batch Mode', 'TINT e-Service', '02 401 9889', 'ต่อ 6101–6103', 'จันทร์–ศุกร์'
+  ];
+  const esc = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const RE = new RegExp('(' + WORDS.slice().sort((a, b) => b.length - a.length).map(esc).join('|') +
+    '|\\d[\\d.,–-]*\\s?(?:kGy|กล่อง|บาท|จูล|ตู้|รอบ))', 'g');
+  const SKIP = /^(SCRIPT|STYLE|TEXTAREA|TITLE|svg|text|tspan|BUTTON|OPTION)$/;
+  return function (root) {
+    const tw = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(n) {
+        // ข้อความที่อยู่ตรงๆ ใน flex/grid: ถ้าแยกเป็น span จะกลายเป็นหลายช่องเรียงแถว ไม่ตัดบรรทัด
+        if (/flex|grid/.test(getComputedStyle(n.parentNode).display)) return NodeFilter.FILTER_REJECT;
+        for (let e = n.parentNode; e && e !== document.body; e = e.parentNode) {
+          if (SKIP.test(e.nodeName) || (e.classList && (e.classList.contains('nw') || e.classList.contains('pill')))) return NodeFilter.FILTER_REJECT;
+        }
+        RE.lastIndex = 0;
+        return RE.test(n.data) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+    const nodes = []; let n;
+    while ((n = tw.nextNode())) nodes.push(n);
+    nodes.forEach(node => {
+      const frag = document.createDocumentFragment(); let last = 0;
+      node.data.replace(RE, (m, _g, at) => {
+        if (at > last) frag.appendChild(document.createTextNode(node.data.slice(last, at)));
+        const sp = document.createElement('span'); sp.className = 'nw'; sp.textContent = m; frag.appendChild(sp);
+        last = at + m.length; return m;
+      });
+      if (last < node.data.length) frag.appendChild(document.createTextNode(node.data.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  };
+})();
+keepTogether(document.body);
+</script>
+<script>
 (function(){
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1169,6 +1221,7 @@ function drawSticker(L, type){
     band.style.left = a + '%';
     band.style.width = Math.max(b - a, 2.5) + '%';
     document.getElementById('rNote').textContent = it.note;
+    keepTogether(document.querySelector('.result'));
   }
   items.forEach((it, i) => {
     const c = document.createElement('button');
