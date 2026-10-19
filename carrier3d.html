@@ -158,7 +158,23 @@
   <span style="color:#9aa4b2;font-size:10px;">ลากซ้าย=หมุนกล้อง • ลากขวา/Shift+ลาก=เลื่อนจุดมอง • เมาส์กลิ้ง=ซูม</span>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ถ้ามีปัญหา แสดงสาเหตุบนหน้าจอแทนการเป็นกรอบว่าง
+window.__show3dError = function (msg) {
+  var d = document.getElementById('err3d');
+  if (!d) {
+    d = document.createElement('div'); d.id = 'err3d';
+    d.style.cssText = 'position:fixed;inset:0;z-index:99;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font:14px/1.6 Segoe UI,Tahoma,sans-serif;color:#334155;background:#e2e8f0';
+    document.body.appendChild(d);
+  }
+  d.textContent = msg;
+};
+window.addEventListener('error', function (e) {
+  window.__show3dError('แสดงโมเดล 3 มิติไม่ได้ (' + (e.message || 'error') + ')');
+});
+</script>
+<script src="three.r128.min.js"></script>
+<script>if (!window.THREE) window.__show3dError('โหลดไลบรารี 3 มิติไม่สำเร็จ ลองรีเฟรชหน้า');</script>
 <script>
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xe2e8f0);
@@ -1287,6 +1303,8 @@ window.addEventListener('mousemove', e=>{
 // (ปิดการซูมด้วยล้อเมาส์และการหมุนด้วยนิ้ว เพื่อไม่ให้แย่งการเลื่อนหน้าเว็บ)
 
 function fitView(){
+  // ยังไม่มีขนาด (กรอบยังจัดหน้าไม่เสร็จ): รอเฟรมถัดไป กันกล้องได้ค่า NaN แล้วเห็นแต่พื้นหลัง
+  if (!window.innerWidth || !window.innerHeight) { requestAnimationFrame(fitView); return; }
   camera.aspect = window.innerWidth/window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
