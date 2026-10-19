@@ -160,7 +160,13 @@
 
 <script>
 // ถ้ามีปัญหา แสดงสาเหตุบนหน้าจอแทนการเป็นกรอบว่าง
+var EMBEDDED = window.parent !== window;
+// ฝังในหน้าเว็บ: พื้นหลังโปร่งใส ให้เห็นภาพนิ่งของโมเดลระหว่างรอโหลด
+if (EMBEDDED) document.documentElement.style.background = 'transparent';
+document.addEventListener('DOMContentLoaded', function () { if (EMBEDDED) document.body.style.background = 'transparent'; });
 window.__show3dError = function (msg) {
+  // ฝังในหน้าเว็บ: บอกหน้าหลักให้แสดงภาพนิ่งแทน
+  if (EMBEDDED) { try { window.parent.postMessage({ type: 'carrier3d-error', message: msg }, '*'); } catch (e) {} return; }
   var d = document.getElementById('err3d');
   if (!d) {
     d = document.createElement('div'); d.id = 'err3d';
