@@ -195,6 +195,7 @@ p{margin:0}
 .stat{padding:16px 12px 4px 0;border-bottom:1px solid var(--line)}
 .stat:nth-child(odd){border-right:1px solid var(--line)}
 .stat:nth-child(even){padding-left:16px}
+.stat:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .stat b{display:block;font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:700;line-height:1.05;letter-spacing:-.01em;white-space:nowrap}
 .stat b sup{font-size:.5em;margin-left:1px}
 .stat span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.5;padding-bottom:12px}
@@ -412,7 +413,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 @media (min-width:720px){
   :root{--gutter:32px}
   body{font-size:17px}
-  .stats{grid-template-columns:repeat(4,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat:last-child:nth-child(odd){grid-column:auto}
   .stat,.stat:nth-child(even){padding:18px 14px 4px 16px;border-right:1px solid var(--line)}
   .stat:first-child{padding-left:0}
   .stat:last-child{border-right:0}
@@ -604,7 +606,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <div class="stat"><b>Co-60</b><span>แหล่งกำเนิดรังสีแกมมา</span></div>
       <div class="stat"><b>9</b><span>ตู้ฉายหมุนรอบแหล่งรังสี</span></div>
       <div class="stat"><b>0.05–50</b><span>ช่วงปริมาณรังสี (kGy) ตามชนิดงาน</span></div>
-      <div class="stat"><b>0</b><span>รังสีตกค้างในสินค้าหลังฉาย</span></div>
     </div>
   </div>
 </section>
