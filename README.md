@@ -2,6 +2,6 @@
 
 หน้าเว็บที่เปิดเมื่อสแกน QR บนฉลากกล่องสินค้าฉายรังสี ฝ่ายฉายรังสีแกมมา สทน. สาขาคลองห้า
 
-- ลิงก์: `https://bpattadon-jpg.github.io/gamma-label/?job=<RecordID>&box=<เลขกล่อง>`
+- ลิงก์: `https://tint-gamma.github.io/gamma-label/?job=<RecordID>&box=<เลขกล่อง>`
 - ข้อมูลฉลากไม่ได้เก็บใน repo นี้ หน้าเว็บดึงจาก Google Sheets (แท็บ Jobs) ผ่าน Apps Script (`?api=1`) ทุกครั้งที่เปิด
 - เปิดแบบไม่มีพารามิเตอร์ = หน้าประชาสัมพันธ์ของศูนย์ฉายรังสี
