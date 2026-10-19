@@ -341,6 +341,21 @@ section{position:relative}
 .safe-item h3{font-size:18px}
 .safe-item p{color:var(--ink-2);font-size:15.5px;margin-top:4px}
 
+/* standards */
+.std{display:grid;gap:14px}
+.std-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px 22px;overflow:hidden}
+.std-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--iri)}
+.std-num{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:44px;line-height:1;letter-spacing:-.01em}
+.std-name{display:block;margin-top:8px;font-size:17px;font-weight:600}
+.std-card > p{margin-top:8px;color:var(--ink-2);font-size:15.5px}
+.std-meta{margin:14px 0 0;border-top:1px solid #EEF2F8}
+.std-meta div{display:grid;grid-template-columns:104px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #EEF2F8;font-size:14px}
+.std-meta dt{color:var(--ink-3)}
+.std-meta dd{margin:0;font-weight:500}
+.std-card .pill{margin-top:14px;min-height:40px;font-size:14px}
+.std-note{margin-top:16px;font-size:14.5px;color:var(--ink-2);display:flex;gap:10px;align-items:flex-start}
+.std-note svg{width:20px;height:20px;flex-shrink:0;margin-top:3px;color:var(--blue)}
+
 /* gallery */
 .gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .ph{
@@ -440,6 +455,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .ph,.ph.big{aspect-ratio:auto}
   .ph.big{grid-column:1/3;grid-row:1/3}
   .rs{grid-template-columns:repeat(3,1fr)}
+  .std{grid-template-columns:1fr 1fr}
   .hero-grid .pool{width:100%;max-width:620px;justify-self:center}
   .contact{padding:44px 44px}
   .c-actions{grid-template-columns:repeat(4,auto);justify-content:start}
@@ -509,6 +525,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <a href="#dose">ปริมาณรังสี</a>
       <a href="#process">ขั้นตอน</a>
       <a href="#safety">ความปลอดภัย</a>
+      <a href="#standards">มาตรฐาน</a>
       <a href="#faq">คำถาม</a>
     </nav>
     <a class="pill pill-dark" href="#contact">ติดต่อเรา</a>
@@ -521,6 +538,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   <a href="#dose">ปริมาณรังสีที่ใช้</a>
   <a href="#process">ขั้นตอนการขอใช้บริการ</a>
   <a href="#safety">ความปลอดภัย</a>
+  <a href="#standards">มาตรฐานและการรับรอง</a>
   <a href="#gallery">ภาพบรรยากาศ</a>
   <a href="#faq">คำถามที่พบบ่อย</a>
   <a href="#contact">ติดต่อเรา</a>
@@ -741,6 +759,31 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   </div>
 </section>
 
+<!-- STANDARDS -->
+<section class="sec" id="standards" data-name="มาตรฐาน" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">Certification</span>มาตรฐานและการรับรอง</h2>
+    </div>
+    <div class="std">
+      <article class="std-card" data-cert="iso9001">
+        <span class="std-num">ISO 9001</span>
+        <span class="std-name">ระบบบริหารงานคุณภาพ</span>
+        <p>งานบริการทำตามขั้นตอนที่กำหนดเป็นเอกสาร ตรวจสอบย้อนกลับได้ทุกงาน</p>
+      </article>
+      <article class="std-card" data-cert="iso13485">
+        <span class="std-num">ISO 13485</span>
+        <span class="std-name">ระบบบริหารคุณภาพสำหรับเครื่องมือแพทย์</span>
+        <p>มาตรฐานที่ผู้ผลิตเครื่องมือแพทย์ใช้ประเมินผู้ให้บริการทำให้ปราศจากเชื้อ</p>
+      </article>
+    </div>
+    <p class="std-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span>ได้รับการรับรองและตรวจติดตามจากหน่วยรับรองภายนอกทุกปี</span>
+    </p>
+  </div>
+</section>
+
 <!-- GALLERY -->
 <section class="sec" id="gallery" data-name="ภาพบรรยากาศ" style="padding-top:0">
   <div class="wrap">
@@ -891,6 +934,12 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbzGx688iNhibdEmJVz8uwMV
 </script>
 <script>
 /* รูปในหัวข้อ "ภายในศูนย์ฉายรังสี": ใส่ลิงก์รูป (https://...) หรือ data:image/... ในเครื่องหมาย '' ช่องที่ว่างจะแสดงภาพประกอบแทน */
+/* รายละเอียดใบรับรอง: กรอกเมื่อมีข้อมูล ช่องที่ว่างจะไม่แสดงบนเว็บ
+   file = ลิงก์ไฟล์ใบรับรอง (PDF/รูป) ถ้าใส่ จะมีปุ่ม "ดูใบรับรอง" */
+window.CERTS = {
+  iso9001:  { body: '', number: '', validUntil: '', file: '' },
+  iso13485: { body: '', number: '', validUntil: '', file: '' }
+};
 window.PHOTOS = {
   building:  '',
   control:   '',
@@ -1106,7 +1155,7 @@ window.keepTogether = (function(){
     'เครื่องสำรวจรังสี', 'เครื่องวัดรังสี', 'ประจำตัว', 'วัตถุประสงค์', 'ความปลอดภัย', 'ประเทศคู่ค้า', 'สหรัฐอเมริกา',
     'ซัลโมเนลลา', 'ตามชนิดงาน', 'แหล่งกำเนิดรังสี', 'แหล่งรังสี', 'ทุกด้าน', 'วัดได้จริง', 'สินค้าทั้งพาเลท', 'ช่องทางด้านล่าง', 'เมื่อลูกค้าร้องขอ', 'ปราศจากเชื้อ', 'รับส่งสินค้า', 'สินค้าอาหาร', 'อาหารสัตว์เลี้ยง', 'อาหารแปรรูป', 'ตัวอย่างงานวิจัย', 'งานวิจัย', 'เซริซิน', 'โปรตีน', 'นวัตกรรม',
     'วันหยุดราชการ', 'เทคโนธานี', 'ตำบลคลองห้า', 'อำเภอคลองหลวง', 'จังหวัดปทุมธานี 12120', 'ปทุมธานี',
-    'ISO 11137', 'Batch Mode', 'TINT e-Service', '02 401 9889', 'ต่อ 6101–6103', 'จันทร์–ศุกร์'
+    'ISO 11137', 'ISO 9001', 'ISO 13485', 'หน่วยรับรอง', 'ตรวจติดตาม', 'Batch Mode', 'TINT e-Service', '02 401 9889', 'ต่อ 6101–6103', 'จันทร์–ศุกร์'
   ];
   const esc = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const RE = new RegExp('(' + WORDS.slice().sort((a, b) => b.length - a.length).map(esc).join('|') +
@@ -1153,6 +1202,21 @@ keepTogether(document.body);
   }
   btn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
   document.querySelectorAll('#mobileMenu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  /* ---------- certificate details (see CERTS at the bottom of the page) ---------- */
+  document.querySelectorAll('[data-cert]').forEach(card => {
+    const c = (window.CERTS || {})[card.dataset.cert] || {};
+    const rows = [['หน่วยรับรอง', c.body], ['เลขที่ใบรับรอง', c.number], ['ใช้ได้ถึง', c.validUntil]].filter(r => String(r[1] || '').trim());
+    if (rows.length) {
+      const dl = document.createElement('dl'); dl.className = 'std-meta';
+      rows.forEach(([k, v]) => { const d = document.createElement('div'); const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; d.append(dt, dd); dl.appendChild(d); });
+      card.appendChild(dl);
+    }
+    if (String(c.file || '').trim()) {
+      const a = document.createElement('a'); a.className = 'pill pill-ghost'; a.href = c.file; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'ดูใบรับรอง';
+      card.appendChild(a);
+    }
+  });
 
   /* ---------- photos (see PHOTOS at the bottom of the page) ---------- */
   document.querySelectorAll('[data-photo]').forEach(el => {
