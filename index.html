@@ -1190,8 +1190,12 @@ function drawSticker(L, type){
       const so = document.createElement('source'); so.src = src; so.type = type; v.appendChild(so);
     });
     v.title = 'วิดีโอจากแบบจำลอง 3 มิติ' + (reason ? ' (' + reason + ')' : '');
+    // วินาทีที่เริ่มรอบ 1–9 ในวิดีโอ (ช่วงตู้เคลื่อนที่เล่นความเร็วจริง ช่วงพักเร่งให้เร็วขึ้น)
+    const ROUND_STARTS = [0.0, 11.67, 20.62, 29.58, 38.54, 47.46, 56.42, 65.38, 74.33];
     v.addEventListener('timeupdate', () => {
-      if (v.duration) stepEl.textContent = String(Math.min(9, Math.floor(v.currentTime / (v.duration / 9)) + 1));
+      let r = 1;
+      ROUND_STARTS.forEach((t, i) => { if (v.currentTime >= t) r = i + 1; });
+      stepEl.textContent = String(r);
     });
     v.addEventListener('error', () => { document.querySelector('.pool-count').hidden = true; });
     view3d.insertBefore(v, frame3d);

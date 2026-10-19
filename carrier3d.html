@@ -1430,21 +1430,27 @@ modeButtons.forEach(btn => {
   });
 });
 
-let hostVisible = true, lastPostedRound = -1;
+let hostVisible = true, lastPostedRound = -1, lastFrameMs = 0, frameK = 1;
 window.addEventListener('message', e => {
   if (e.data && e.data.type === 'carrier3d-visible') hostVisible = !!e.data.visible;
 });
 function animate() {
   requestAnimationFrame(animate);
-  if (!hostVisible) return;   // หน้าเว็บเลื่อนผ่านไปแล้ว: หยุดวาดเพื่อประหยัดแบต
+  if (!hostVisible) { lastFrameMs = 0; return; }   // หน้าเว็บเลื่อนผ่านไปแล้ว: หยุดวาดเพื่อประหยัดแบต
   const roundNow = Math.floor(simTime / ROUND_DURATION) + 1;
   if (roundNow !== lastPostedRound && window.parent !== window) {
     lastPostedRound = roundNow;
     window.parent.postMessage({ type: 'carrier3d-round', round: roundNow, total: TOTAL_ROUNDS }, '*');
   }
   stepCameraAnim();
-  clock += 0.016;
-  if (!isPaused) simTime += 0.016;
+  // เวลาจริงต่อเฟรม (เดิมบวก 0.016 ทุกเฟรม ทำให้จอ 120 Hz เล่นเร็วขึ้น 2 เท่า)
+  const nowMs = performance.now();
+  let dt = window.__fixedDt || (lastFrameMs ? (nowMs - lastFrameMs) / 1000 : 0.016);
+  lastFrameMs = nowMs;
+  dt = Math.min(dt, 0.05);          // แท็บค้าง/สลับแอป: ไม่กระโดดข้ามช่วง
+  frameK = dt / 0.016;              // อัตราส่วนเทียบเฟรม 60 Hz สำหรับค่าที่สะสมทีละเฟรม
+  clock += dt;
+  if (!isPaused) simTime += dt;
   if (simTime >= LOOP_DURATION) {
     simTime -= LOOP_DURATION;
     // full 9-round cycle just completed — reset every carrier's dose glow
@@ -1455,7 +1461,7 @@ function animate() {
     });
   }
   const CONT_CYCLE_DURATION = CONT_ROUND_DURATION * TOTAL_ROUNDS;
-  if (!isPaused) contTime += 0.016;
+  if (!isPaused) contTime += dt;
   if (contTime >= CONT_CYCLE_DURATION) contTime -= CONT_CYCLE_DURATION;
 
   const loopT = simTime;
@@ -1587,7 +1593,7 @@ function animate() {
     const allMats = box.userData.allMats;
     const targetOpacity = overSource ? CARRIER_SEE_THROUGH_OPACITY : 1;
     allMats.forEach(m => {
-      m.opacity += (targetOpacity - m.opacity) * 0.12;
+      m.opacity += (targetOpacity - m.opacity) * (1 - Math.pow(0.88, frameK));
       m.depthWrite = m.opacity > 0.9;
       m.depthTest = m.opacity > 0.9;
     });
@@ -1596,8 +1602,8 @@ function animate() {
     // Radiation exposure: only the face currently oriented toward the plate accumulates
     // dose, and dose never fades once gained — a real irradiated face stays irradiated.
     if (overPlateColumn) {
-      if (inRowA) box.userData.doseNegZ = Math.min(1, box.userData.doseNegZ + 0.035);
-      else box.userData.dosePosZ = Math.min(1, box.userData.dosePosZ + 0.035);
+      if (inRowA) box.userData.doseNegZ = Math.min(1, box.userData.doseNegZ + 0.035 * frameK);
+      else box.userData.dosePosZ = Math.min(1, box.userData.dosePosZ + 0.035 * frameK);
     }
     box.userData.matNZ.color.copy(box.userData.baseColor).lerp(PLATE_GLOW_COLOR, box.userData.doseNegZ * 0.6);
     box.userData.matNZ.emissiveIntensity = box.userData.doseNegZ * 0.4;
