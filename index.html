@@ -217,6 +217,7 @@ p{margin:0}
 }
 .pool-view{position:relative;z-index:1;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#e2e8f0 url("carrier3d-poster.webp") center/cover no-repeat;box-shadow:inset 0 0 0 1px rgba(159,183,224,.25)}
 .pool-view iframe{display:block;width:100%;height:100%;border:0}
+.pool-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 @media (min-width:1000px){.pool-view{aspect-ratio:16/11}}
 .pool-foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:12px 6px 0}
 .pool-foot p{font-size:13.5px;line-height:1.55;color:#B9CBEA;max-width:34ch}
@@ -1172,20 +1173,45 @@ function drawSticker(L, type){
 
   /* ---------- 3D carrier model (carrier3d.html, Batch Mode) ---------- */
   const frame3d = document.getElementById('carrier3d');
+  const view3d = frame3d.parentElement;
   const stepEl = document.getElementById('poolStep');
+  let video3d = null, inView = true;
+
+  // เครื่องที่แสดง 3 มิติไม่ได้ (ไม่มี WebGL): เล่นวิดีโอที่อัดจากโมเดลเดียวกันแทน
+  function useVideo(reason) {
+    if (video3d) return;
+    frame3d.style.visibility = 'hidden';
+    const v = document.createElement('video');
+    v.className = 'pool-video';
+    v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+    v.poster = 'carrier3d-poster.webp';
+    [['carrier3d-loop.mp4', 'video/mp4'], ['carrier3d-loop.webm', 'video/webm']].forEach(([src, type]) => {
+      const so = document.createElement('source'); so.src = src; so.type = type; v.appendChild(so);
+    });
+    v.title = 'วิดีโอจากแบบจำลอง 3 มิติ' + (reason ? ' (' + reason + ')' : '');
+    v.addEventListener('timeupdate', () => {
+      if (v.duration) stepEl.textContent = String(Math.min(9, Math.floor(v.currentTime / (v.duration / 9)) + 1));
+    });
+    v.addEventListener('error', () => { document.querySelector('.pool-count').hidden = true; });
+    view3d.insertBefore(v, frame3d);
+    video3d = v;
+    if (inView) v.play().catch(() => {});
+  }
+
   window.addEventListener('message', e => {
     if (e.source !== frame3d.contentWindow || !e.data) return;
     if (e.data.type === 'carrier3d-round') stepEl.textContent = String(e.data.round);
-    // เครื่องที่แสดง 3 มิติไม่ได้ (ไม่มี WebGL): ซ่อนกรอบ 3 มิติ เหลือภาพนิ่งของโมเดล
-    if (e.data.type === 'carrier3d-error') {
-      frame3d.style.visibility = 'hidden';
-      document.querySelector('.pool-count').hidden = true;
-      document.querySelector('.pool-tag').textContent = 'ภาพจากแบบจำลอง 3 มิติ';
-    }
+    if (e.data.type === 'carrier3d-error') useVideo(e.data.message);
   });
-  // หยุดวาดโมเดลเมื่อเลื่อนพ้นจอ ประหยัดแบตมือถือ
-  const tell = v => { try { frame3d.contentWindow.postMessage({ type: 'carrier3d-visible', visible: v }, '*'); } catch (e) {} };
-  new IntersectionObserver(es => tell(es[0].isIntersecting), { threshold: 0.05 }).observe(frame3d);
+
+  // หยุดวาดโมเดล/หยุดวิดีโอเมื่อเลื่อนพ้นจอ ประหยัดแบตมือถือ
+  const tell = v => {
+    inView = v;
+    try { frame3d.contentWindow.postMessage({ type: 'carrier3d-visible', visible: v }, '*'); } catch (e) {}
+    if (video3d) { if (v) video3d.play().catch(() => {}); else video3d.pause(); }
+  };
+  new IntersectionObserver(es => tell(es[0].isIntersecting), { threshold: 0.05 }).observe(view3d);
   document.addEventListener('visibilitychange', () => tell(!document.hidden));
 })();
 </script>
