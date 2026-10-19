@@ -215,12 +215,14 @@ p{margin:0}
   background:repeating-radial-gradient(circle at 30% 20%,rgba(255,255,255,.05) 0 2px,transparent 2px 22px);
   mix-blend-mode:screen;
 }
-.pool svg{width:100%;height:auto;position:relative;z-index:1}
-.pool-foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:2px 6px 0}
+.pool-view{position:relative;z-index:1;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#e2e8f0;box-shadow:inset 0 0 0 1px rgba(159,183,224,.25)}
+.pool-view iframe{display:block;width:100%;height:100%;border:0}
+@media (min-width:1000px){.pool-view{aspect-ratio:16/11}}
+.pool-foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:12px 6px 0}
 .pool-foot p{font-size:13.5px;line-height:1.55;color:#B9CBEA;max-width:34ch}
 .pool-count{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:700;color:#fff;white-space:nowrap;line-height:1}
 .pool-count small{font-family:"Anuphan",sans-serif;font-size:12px;font-weight:500;color:#9FB7E0;display:block;text-align:right;margin-bottom:4px}
-.pool-tag{position:absolute;z-index:2;top:14px;left:16px;font-size:12px;color:#9FB7E0;letter-spacing:.02em}
+.pool-tag{position:absolute;z-index:2;bottom:10px;left:10px;font-size:12px;color:#DCE8FF;letter-spacing:.02em;background:rgba(7,23,51,.72);padding:3px 10px;border-radius:999px;pointer-events:none}
 
 /* ---------- SECTIONS ---------- */
 section{position:relative}
@@ -577,28 +579,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     </div>
 
     <figure class="pool" style="margin:0">
-      <span class="pool-tag">ภาพจำลองหลักการ</span>
-      <svg id="orbit" viewBox="0 0 400 300" role="img" aria-labelledby="orbitTitle">
-        <title id="orbitTitle">ภาพจำลองตู้ฉาย 9 ตู้หมุนเวียนรอบแหล่งรังสีโคบอลต์-60 จนได้รับรังสีเท่ากันทุกตู้</title>
-        <defs>
-          <filter id="glow" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="7"/></filter>
-          <filter id="glow2" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="2.5"/></filter>
-          <linearGradient id="fillG" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2457E6"/><stop offset=".6" stop-color="#3FD0FF"/><stop offset="1" stop-color="#B9F0FF"/></linearGradient>
-          <linearGradient id="plaqueG" x1="0" x2="1"><stop offset="0" stop-color="#3FD0FF" stop-opacity=".2"/><stop offset=".5" stop-color="#E8FBFF"/><stop offset="1" stop-color="#3FD0FF" stop-opacity=".2"/></linearGradient>
-        </defs>
-        <ellipse cx="200" cy="150" rx="150" ry="94" fill="none" stroke="#9FB7E0" stroke-opacity=".22" stroke-dasharray="3 6"/>
-        <g id="rays"></g>
-        <g id="plaque">
-          <rect x="120" y="140" width="160" height="20" rx="10" fill="#3FD0FF" opacity=".55" filter="url(#glow)"/>
-          <rect x="128" y="146" width="144" height="8" rx="4" fill="url(#plaqueG)" filter="url(#glow2)"/>
-          <rect x="132" y="148" width="136" height="4" rx="2" fill="#F2FDFF"/>
-        </g>
-        <text x="200" y="176" text-anchor="middle" fill="#9FE6FF" font-size="11" font-family="Anuphan, sans-serif" letter-spacing=".5">แหล่งรังสีโคบอลต์-60</text>
-        <g id="carriers"></g>
-      </svg>
+      <div class="pool-view">
+        <span class="pool-tag">แบบจำลอง 3 มิติ (Batch Mode)</span>
+        <iframe id="carrier3d" src="carrier3d.html" title="แบบจำลอง 3 มิติ: ตู้ฉายรังสี 9 ตู้หมุนเวียนรอบแผ่นต้นกำเนิดรังสี (Batch Mode)" loading="lazy" tabindex="-1"></iframe>
+      </div>
       <figcaption class="pool-foot">
-        <p id="poolMsg">ตู้ฉายเวียนผ่านทุกตำแหน่งรอบแหล่งรังสี แถบสีฟ้าในตู้คือปริมาณรังสีที่สะสม</p>
-        <span class="pool-count"><small>ตำแหน่งที่</small><span id="poolStep">1</span>/9</span>
+        <p id="poolMsg">Batch Mode: ตู้ฉาย 9 ตู้สลับฝั่งรอบแผ่นต้นกำเนิดรังสีครบ 9 รอบ ทุกด้านของตู้จึงได้รับรังสีทั่วถึง</p>
+        <span class="pool-count"><small>รอบที่</small><span id="poolStep">1</span>/9</span>
       </figcaption>
     </figure>
 
@@ -1183,104 +1170,18 @@ function drawSticker(L, type){
   });
   show(0);
 
-  /* ---------- orbit animation ---------- */
-  const NS = 'http://www.w3.org/2000/svg';
-  const N = 9, CX = 200, CY = 150, RX = 150, RY = 94;
-  const W = 28, H = 36, FH = 30;
-  const angAt = i => -Math.PI / 2 + i * 2 * Math.PI / N;
-  const ptAt = a => [CX + RX * Math.cos(a), CY + RY * Math.sin(a)];
-  // relative dose rate at each position ~ 1/d^2 from the nearest point of the source plaque
-  const near = (x, y) => [Math.max(132, Math.min(268, x)), 150];
-  let wts = [...Array(N)].map((_, i) => { const [x, y] = ptAt(angAt(i)); const [px, py] = near(x, y); const d = Math.hypot(x - px, y - py); return 1 / (d * d); });
-  const sum = wts.reduce((a, b) => a + b, 0); wts = wts.map(w => w / sum);
-  const maxW = Math.max(...wts);
-
-  const gC = document.getElementById('carriers');
-  const gR = document.getElementById('rays');
-  const car = [];
-  for (let k = 0; k < N; k++){
-    const ray = document.createElementNS(NS, 'line');
-    ray.setAttribute('stroke', '#3FD0FF'); ray.setAttribute('stroke-width', '1.2');
-    ray.setAttribute('stroke-dasharray', '2 5'); ray.setAttribute('stroke-linecap', 'round');
-    gR.appendChild(ray);
-    const g = document.createElementNS(NS, 'g');
-    const body = document.createElementNS(NS, 'rect');
-    body.setAttribute('x', -W/2); body.setAttribute('y', -H/2); body.setAttribute('width', W); body.setAttribute('height', H);
-    body.setAttribute('rx', 3); body.setAttribute('fill', '#0D2550'); body.setAttribute('stroke', '#9FB7E0'); body.setAttribute('stroke-width', '1.2');
-    const fill = document.createElementNS(NS, 'rect');
-    fill.setAttribute('x', -W/2 + 4); fill.setAttribute('width', W - 8); fill.setAttribute('rx', 1.5); fill.setAttribute('fill', 'url(#fillG)');
-    const shelf = document.createElementNS(NS, 'path');
-    shelf.setAttribute('d', `M${-W/2} ${-H/6}H${W/2}M${-W/2} ${H/6}H${W/2}`);
-    shelf.setAttribute('stroke', '#9FB7E0'); shelf.setAttribute('stroke-opacity', '.35'); shelf.setAttribute('stroke-width', '1');
-    g.append(body, fill, shelf);
-    gC.appendChild(g);
-    car.push({g, fill, ray, dose: 0});
-  }
+  /* ---------- 3D carrier model (carrier3d.html, Batch Mode) ---------- */
+  const frame3d = document.getElementById('carrier3d');
   const stepEl = document.getElementById('poolStep');
-  const msgEl = document.getElementById('poolMsg');
-  const MSG_RUN = 'ตู้ฉายเวียนผ่านทุกตำแหน่งรอบแหล่งรังสี แถบสีฟ้าในตู้คือปริมาณรังสีที่สะสม';
-  const MSG_DONE = 'ครบ 9 ตำแหน่ง ทุกตู้ได้รับรังสีเท่ากัน';
-
-  function draw(step, moveT, dwellT){
-    // step: index of current dwell (0..8); moveT: 0..1 progress moving into this position
-    for (let k = 0; k < N; k++){
-      const c = car[k];
-      const from = angAt(k + step - 1), to = angAt(k + step);
-      const e = moveT < 1 ? (1 - Math.cos(Math.PI * moveT)) / 2 : 1;
-      const a = from + (to - from) * e;
-      const [x, y] = ptAt(a);
-      c.g.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)})`);
-      const posIdx = (k + step) % N;
-      let d = 0;
-      for (let t = 0; t < step; t++) d += wts[(k + t) % N];
-      if (moveT >= 1) d += wts[posIdx] * dwellT;
-      const h = Math.min(1, d) * FH;
-      c.fill.setAttribute('y', (H/2 - 3 - h).toFixed(2));
-      c.fill.setAttribute('height', h.toFixed(2));
-      const [px, py] = near(x, y);
-      c.ray.setAttribute('x1', px); c.ray.setAttribute('y1', py);
-      c.ray.setAttribute('x2', x.toFixed(2)); c.ray.setAttribute('y2', y.toFixed(2));
-      const op = moveT >= 1 ? 0.15 + 0.75 * (wts[posIdx] / maxW) * (0.6 + 0.4 * Math.sin(dwellT * Math.PI)) : 0.08;
-      c.ray.setAttribute('stroke-opacity', op.toFixed(3));
+  window.addEventListener('message', e => {
+    if (e.source === frame3d.contentWindow && e.data && e.data.type === 'carrier3d-round') {
+      stepEl.textContent = String(e.data.round);
     }
-  }
-
-  if (reduce){
-    draw(4, 1, 0.5);
-    stepEl.textContent = '5';
-  } else {
-    const MOVE = 650, DWELL = 1150, HOLD = 2200, DRAIN = 700;
-    const CYCLE = N * (MOVE + DWELL);
-    let t0 = null, visible = true, last = 0, acc = 0;
-    const io = new IntersectionObserver(es => { visible = es[0].isIntersecting; }, {threshold: 0.05});
-    io.observe(document.getElementById('orbit'));
-    function frame(ts){
-      if (t0 === null) t0 = ts;
-      const dt = ts - (last || ts); last = ts;
-      if (visible && !document.hidden) acc += Math.min(dt, 60);
-      const T = acc % (CYCLE + HOLD + DRAIN);
-      if (T < CYCLE){
-        const step = Math.floor(T / (MOVE + DWELL));
-        const r = T - step * (MOVE + DWELL);
-        const moveT = Math.min(1, r / MOVE);
-        const dwellT = Math.max(0, (r - MOVE) / DWELL);
-        draw(step, moveT, dwellT);
-        stepEl.textContent = String(step + 1);
-        if (msgEl.textContent !== MSG_RUN) msgEl.textContent = MSG_RUN;
-      } else if (T < CYCLE + HOLD){
-        draw(N - 1, 1, 1);
-        stepEl.textContent = '9';
-        if (msgEl.textContent !== MSG_DONE) msgEl.textContent = MSG_DONE;
-      } else {
-        // drain: fade fills back to zero, carriers stay put
-        const f = 1 - (T - CYCLE - HOLD) / DRAIN;
-        draw(N - 1, 1, 1);
-        car.forEach(c => { const h = FH * Math.max(0, f); c.fill.setAttribute('y', (H/2 - 3 - h).toFixed(2)); c.fill.setAttribute('height', h.toFixed(2)); c.ray.setAttribute('stroke-opacity', '0.08'); });
-      }
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
+  });
+  // หยุดวาดโมเดลเมื่อเลื่อนพ้นจอ ประหยัดแบตมือถือ
+  const tell = v => { try { frame3d.contentWindow.postMessage({ type: 'carrier3d-visible', visible: v }, '*'); } catch (e) {} };
+  new IntersectionObserver(es => tell(es[0].isIntersecting), { threshold: 0.05 }).observe(frame3d);
+  document.addEventListener('visibilitychange', () => tell(!document.hidden));
 })();
 </script>
 </body>
