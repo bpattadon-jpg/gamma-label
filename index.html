@@ -1,0 +1,1173 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gamma Irradiation | สทน. คลองห้า</title>
+<meta name="description" content="บริการฉายรังสีแกมมาด้วยโคบอลต์-60 สำหรับอาหาร สินค้าเกษตร เครื่องมือแพทย์ และงานวิจัย ฝ่ายฉายรังสีแกมมา สถาบันเทคโนโลยีนิวเคลียร์แห่งชาติ สาขาคลองห้า">
+<meta name="theme-color" content="#071733">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#F4F7FC;
+  --surface:#FFFFFF;
+  --ink:#0E1A2B;
+  --ink-2:#46566E;
+  --ink-3:#7A889D;
+  --line:#DCE3EE;
+  --blue:#2457E6;
+  --cyan:#3FD0FF;
+  --violet:#8A6CFF;
+  --pool:#071733;
+  --pool-2:#0B2350;
+  --amber:#F2B705;
+  --iri: linear-gradient(100deg,#3FD0FF 0%,#6E8BFF 38%,#B07CFF 68%,#FF8FCF 100%);
+  --radius-lg:28px;
+  --radius:18px;
+  --gutter:20px;
+  --rail:0px;
+  --nav-h:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Anuphan",system-ui,sans-serif;font-size:16px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-variant-numeric:lining-nums;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+h1,h2,h3{margin:0;line-height:1.3;font-weight:600}
+p{margin:0}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;height:var(--nav-h);
+  background:rgba(255,255,255,.86);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+  border-bottom:1px solid rgba(220,227,238,.7);
+}
+.nav .wrap{height:100%;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo{display:block;background:var(--logo) center/contain no-repeat;aspect-ratio:183/112}
+.brand .logo{height:34px}
+@media (max-width:419px){ .nav .pill{display:none} .nav .menu-btn{margin-left:auto} }
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text b{font-family:"Cormorant Garamond",serif;font-size:19px;font-weight:700;letter-spacing:.01em}
+.brand-text small{font-size:11.5px;color:var(--ink-2)}
+.nav-links{display:none;margin-left:auto;gap:4px}
+.nav-links a{
+  position:relative;text-decoration:none;font-size:14.5px;color:var(--ink-2);
+  padding:8px 12px;border-radius:999px;transition:color .2s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--ink)}
+.nav-links a.active::after{content:"";position:absolute;left:12px;right:12px;bottom:2px;height:2px;border-radius:2px;background:var(--iri)}
+.pill{
+  --bd:var(--iri);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:0 20px;border-radius:999px;text-decoration:none;
+  font:600 15px/1 "Anuphan",sans-serif;cursor:pointer;border:0;white-space:nowrap;
+}
+.pill-dark{
+  color:#fff;background:linear-gradient(var(--pool),var(--pool)) padding-box, var(--bd) border-box;
+  border:2px solid transparent;box-shadow:0 6px 18px rgba(36,87,230,.25);
+}
+.pill-dark:hover{box-shadow:0 8px 26px rgba(110,139,255,.45)}
+.pill-ghost{color:var(--ink);background:#fff;border:1.5px solid var(--line)}
+.pill-ghost:hover{border-color:#B9C6DB}
+.pill svg{width:18px;height:18px;flex-shrink:0}
+.nav .pill{margin-left:auto;min-height:40px;padding:0 16px;font-size:14px}
+.menu-btn{
+  width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:#fff;
+  display:grid;place-items:center;cursor:pointer;flex-shrink:0;
+}
+.menu-btn span{display:block;width:16px;height:2px;background:var(--ink);border-radius:2px;position:relative}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:16px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s}
+.menu-btn span::before{top:-5px}.menu-btn span::after{top:5px}
+.menu-open .menu-btn span{background:transparent}
+.menu-open .menu-btn span::before{transform:translateY(5px) rotate(45deg)}
+.menu-open .menu-btn span::after{transform:translateY(-5px) rotate(-45deg)}
+.mobile-menu{
+  position:fixed;inset:var(--nav-h) 0 auto 0;z-index:49;background:#fff;border-bottom:1px solid var(--line);
+  padding:8px var(--gutter) 20px;display:none;box-shadow:0 20px 40px rgba(14,26,43,.12);
+}
+.menu-open .mobile-menu{display:block}
+.mobile-menu a{display:block;padding:13px 4px;text-decoration:none;font-size:17px;border-bottom:1px solid #EEF2F8}
+.mobile-menu a:last-child{border-bottom:0}
+
+/* ---------- SIDE RAIL (desktop) ---------- */
+.rail{display:none}
+
+/* ---------- BOX LABEL (after scanning a box QR) ---------- */
+.lbl-sec{padding:20px 0 40px}
+.lbl-grid{display:grid;gap:28px}
+.lbl{
+  position:relative;background:#fff;border:2px solid var(--ink);border-radius:20px;
+  padding:22px 20px 18px;width:100%;max-width:560px;
+  box-shadow:0 26px 50px -30px rgba(14,26,43,.5);
+}
+.lbl::before{content:"";position:absolute;left:22px;right:22px;top:-2px;height:4px;border-radius:0 0 4px 4px;background:var(--iri)}
+.lbl-head{display:flex;align-items:center;gap:14px;padding-bottom:16px;border-bottom:1px dashed #C9D3E2}
+.lbl-head .logo{height:50px;flex-shrink:0}
+.lbl-head b{display:block;font-size:22px;font-weight:700;line-height:1.2}
+.lbl-head span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.45}
+.lbl-status{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 12px 6px 10px;border-radius:999px;font-size:14px;font-weight:600}
+.lbl-status svg{width:17px;height:17px;flex-shrink:0}
+.lbl-status.done{background:#E3F7EE;color:#137A4B}
+.lbl-status.planned{background:#EEF3FD;color:var(--blue)}
+.lbl-box{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 12px;margin:8px 0 4px}
+.lbl-box span{font-size:20px;font-weight:600}
+.lbl-box b{font-family:"Cormorant Garamond",Georgia,serif;font-size:80px;line-height:1;font-weight:700}
+.lbl-box small{font-size:15px;color:var(--ink-2)}
+.lbl-fields{margin:0;border-top:1px solid #EEF2F8}
+.lbl-fields div{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #EEF2F8}
+.lbl-fields dt{font-weight:600;font-size:14.5px;color:var(--ink-2)}
+.lbl-fields dd{margin:0;font-size:16.5px;font-weight:500;overflow-wrap:anywhere}
+.lbl-job{text-align:center;font-size:28px;font-weight:700;margin-top:16px}
+.lbl-bar{display:flex;justify-content:center;margin-top:6px;min-height:20px}
+.lbl-bar svg{max-width:100%;height:auto}
+.lbl-bar .num{font-size:14px;color:var(--ink-2);letter-spacing:.08em}
+.lbl-foot{margin-top:12px;padding-top:12px;border-top:1px dashed #C9D3E2;font-size:13.5px;line-height:1.6;color:var(--ink-2);text-align:center}
+.lbl-foot a{color:var(--blue);font-weight:600;text-decoration:none;white-space:nowrap}
+.lbl-aside h2{font-size:clamp(22px,5vw,30px);line-height:1.35}
+.lbl-aside p{margin-top:10px;color:var(--ink-2);font-size:16px}
+.lbl-aside .pill{margin-top:18px}
+.notice{width:100%;max-width:560px;background:#FFF8E8;border:1.5px solid #F0CF86;border-radius:18px;padding:20px}
+.notice b{display:block;font-size:18px;color:#4A3300;margin-bottom:6px}
+.notice p{color:#6B4A00;font-size:15.5px}
+.notice a{color:#4A3300;font-weight:600}
+.lbl-loading .lbl-box b{color:#C9D3E2}
+.load-msg{display:flex;align-items:center;gap:10px;color:var(--ink-2);font-size:15px;margin:6px 0 16px}
+.spin{width:18px;height:18px;border-radius:50%;border:2.5px solid #DCE3EE;border-top-color:var(--blue);animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sk{display:block;height:14px;border-radius:7px;margin:14px 0;background:linear-gradient(90deg,#EEF2F8 0%,#F7F9FC 50%,#EEF2F8 100%);background-size:200% 100%;animation:sk 1.4s ease-in-out infinite}
+.sk.short{width:55%}
+@keyframes sk{from{background-position:100% 0}to{background-position:-100% 0}}
+.retry{margin-top:14px;background:#fff;border-color:#F0CF86}
+@media (prefers-reduced-motion:reduce){.spin,.sk{animation:none}}
+[hidden]{display:none !important}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding:28px 0 56px;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:-20% -30% auto auto;width:70vw;height:70vw;max-width:760px;max-height:760px;
+  background:radial-gradient(closest-side,rgba(63,208,255,.20),rgba(138,108,255,.10) 55%,transparent 75%);
+  pointer-events:none;
+}
+.hero-grid{position:relative;display:grid;gap:28px}
+.wordmark{line-height:.86;margin-bottom:18px}
+.wordmark .w1,.wordmark .w2{
+  display:block;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;
+  background:linear-gradient(174deg,#18243C 0%,#4F5F7C 24%,#C9D5E8 38%,#6E80A4 50%,#1E2D4C 64%,#7F98D6 80%,#B9A8F5 90%,#26355A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 10px 18px rgba(36,87,230,.16));
+}
+.wordmark .w1{font-size:clamp(84px,24vw,168px);letter-spacing:-.01em}
+.wordmark .w2{font-size:clamp(36px,10.4vw,72px);letter-spacing:.02em;margin-top:2px;padding-left:.06em}
+.hero h1{font-size:clamp(23px,5.6vw,34px);font-weight:600;line-height:1.42;max-width:24ch}
+.nw{white-space:nowrap}
+.hero .lede{margin-top:14px;color:var(--ink-2);font-size:16.5px;max-width:52ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+.stat{padding:16px 12px 4px 0;border-bottom:1px solid var(--line)}
+.stat:nth-child(odd){border-right:1px solid var(--line)}
+.stat:nth-child(even){padding-left:16px}
+.stat b{display:block;font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:700;line-height:1.05;letter-spacing:-.01em;white-space:nowrap}
+.stat b sup{font-size:.5em;margin-left:1px}
+.stat span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.5;padding-bottom:12px}
+
+/* pool panel */
+.pool{
+  position:relative;border-radius:var(--radius-lg);overflow:hidden;color:#DCE8FF;
+  background:
+    radial-gradient(70% 55% at 50% 52%,rgba(63,208,255,.28),transparent 70%),
+    radial-gradient(90% 70% at 50% 110%,rgba(138,108,255,.30),transparent 70%),
+    linear-gradient(180deg,#0B2350,#061430);
+  box-shadow:0 30px 60px -20px rgba(7,23,51,.55), inset 0 0 0 1px rgba(159,183,224,.18);
+  padding:14px 14px 16px;
+}
+.pool::after{ /* caustic shimmer */
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background:repeating-radial-gradient(circle at 30% 20%,rgba(255,255,255,.05) 0 2px,transparent 2px 22px);
+  mix-blend-mode:screen;
+}
+.pool svg{width:100%;height:auto;position:relative;z-index:1}
+.pool-foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:2px 6px 0}
+.pool-foot p{font-size:13.5px;line-height:1.55;color:#B9CBEA;max-width:34ch}
+.pool-count{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:700;color:#fff;white-space:nowrap;line-height:1}
+.pool-count small{font-family:"Anuphan",sans-serif;font-size:12px;font-weight:500;color:#9FB7E0;display:block;text-align:right;margin-bottom:4px}
+.pool-tag{position:absolute;z-index:2;top:14px;left:16px;font-size:12px;color:#9FB7E0;letter-spacing:.02em}
+
+/* ---------- SECTIONS ---------- */
+section{position:relative}
+.sec{padding:72px 0}
+.sec-head{max-width:640px;margin-bottom:32px}
+.sec-head h2{font-size:clamp(26px,6vw,40px);font-weight:600;line-height:1.3}
+.sec-head h2 .serif{font-weight:600;font-style:italic;color:var(--ink-3);font-size:.78em;display:block;margin-bottom:2px;letter-spacing:.01em}
+.sec-head p{margin-top:12px;color:var(--ink-2);font-size:16.5px}
+
+/* how it works (dark) */
+.dark{
+  color:#E6EEFF;
+  background:
+    radial-gradient(60% 45% at 85% 105%,rgba(63,208,255,.28),transparent 70%),
+    radial-gradient(50% 40% at 10% 0%,rgba(138,108,255,.22),transparent 70%),
+    var(--pool);
+  border-radius:var(--radius-lg);margin:0 10px;
+}
+.dark .sec-head h2 .serif{color:#8FA6DE}
+.dark .sec-head p{color:#B9CBEA}
+.how{display:grid;gap:14px;counter-reset:how;list-style:none;margin:0;padding:0}
+.how li{
+  position:relative;padding:22px 20px 22px 74px;border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid rgba(159,183,224,.18);
+}
+.how li::before{
+  counter-increment:how;content:counter(how);
+  position:absolute;left:20px;top:20px;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;font:700 20px/1 "Cormorant Garamond",serif;color:var(--pool);
+  background:var(--iri);
+}
+.how h3{font-size:18.5px;color:#fff;margin-bottom:6px}
+.how p{color:#B9CBEA;font-size:15.5px}
+
+/* services */
+.svc{display:grid;gap:14px}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.card h3{font-size:20px}
+.card p{color:var(--ink-2);font-size:15.5px}
+.dose-chip{
+  align-self:flex-start;display:inline-flex;align-items:baseline;gap:6px;
+  padding:6px 12px;border-radius:999px;background:#EEF3FD;color:var(--blue);font-weight:600;font-size:14px;
+}
+.dose-chip i{font-style:normal;font-weight:500;color:var(--ink-2);font-size:12.5px}
+.card ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.card li{font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2)}
+.card.feature{
+  color:#fff;border:2px solid transparent;
+  background:linear-gradient(160deg,#0B2350,#071733) padding-box,var(--iri) border-box;
+  box-shadow:0 24px 50px -24px rgba(36,87,230,.6);
+}
+.card.feature p{color:#C6D5F2}
+.card.feature .dose-chip{background:rgba(63,208,255,.14);color:#8FE3FF}
+.card.feature .dose-chip i{color:#B9CBEA}
+.card.feature li{border-color:rgba(159,183,224,.3);color:#C6D5F2}
+.card .flag{font-size:12.5px;color:#8FE3FF;font-weight:600}
+.svc-note{margin-top:18px;font-size:14.5px;color:var(--ink-2);display:flex;gap:10px;align-items:flex-start}
+.svc-note svg{width:20px;height:20px;flex-shrink:0;margin-top:3px;color:var(--blue)}
+
+/* finder */
+.finder{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px 18px 24px;box-shadow:0 20px 50px -30px rgba(14,26,43,.25)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font:500 14.5px/1.2 "Anuphan",sans-serif;padding:11px 15px;border-radius:999px;cursor:pointer;
+  background:#F4F7FC;border:1.5px solid var(--line);color:var(--ink);transition:border-color .2s,background .2s;
+}
+.chip:hover{border-color:#B9C6DB}
+.chip[aria-pressed="true"]{color:#fff;border-color:transparent;background:linear-gradient(var(--pool),var(--pool)) padding-box,var(--iri) border-box;border:1.5px solid transparent}
+.result{margin-top:24px;display:grid;gap:18px}
+.result-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px}
+.result-top h3{font-size:22px}
+.result-top .purpose{color:var(--ink-2);font-size:15.5px;margin-top:2px}
+.result-range{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:40px;line-height:1;white-space:nowrap}
+.result-range small{font-family:"Anuphan",sans-serif;font-size:15px;font-weight:600;color:var(--ink-2);margin-left:4px}
+.scale{position:relative;height:64px;margin:6px 4px 0}
+.scale-track{position:absolute;left:0;right:0;top:18px;height:12px;border-radius:999px;background:linear-gradient(90deg,#E9EEF7,#DCE4F2)}
+.scale-band{
+  position:absolute;top:14px;height:20px;border-radius:999px;background:var(--iri);
+  box-shadow:0 0 0 3px #fff,0 6px 16px rgba(110,139,255,.45);
+  transition:left .5s cubic-bezier(.2,.8,.2,1),width .5s cubic-bezier(.2,.8,.2,1);
+}
+.scale-tick{position:absolute;top:36px;transform:translateX(-50%);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.scale-tick::before{content:"";position:absolute;left:50%;top:-8px;width:1px;height:6px;background:#B9C6DB}
+.result-note{font-size:14.5px;color:var(--ink-2);padding:12px 14px;border-radius:12px;background:#F4F7FC}
+.finder-foot{margin-top:16px;font-size:13px;color:var(--ink-3);line-height:1.6}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:st}
+.steps li{position:relative;padding:0 0 28px 64px}
+.steps li::before{
+  counter-increment:st;content:counter(st);
+  position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;background:#fff;border:1.5px solid var(--line);
+  font:700 22px/1 "Cormorant Garamond",serif;color:var(--blue);
+}
+.steps li::after{content:"";position:absolute;left:21px;top:48px;bottom:4px;width:2px;background:linear-gradient(var(--line),transparent)}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:18px;padding-top:8px}
+.steps p{color:var(--ink-2);font-size:15.5px;margin-top:4px}
+
+/* safety */
+.safe{display:grid;gap:0;border-top:1px solid var(--line)}
+.safe-item{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.safe-ico{width:48px;height:48px;border-radius:14px;background:#EEF3FD;display:grid;place-items:center;color:var(--blue)}
+.safe-ico svg{width:24px;height:24px}
+.safe-item h3{font-size:18px}
+.safe-item p{color:var(--ink-2);font-size:15.5px;margin-top:4px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ph{
+  position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;margin:0;
+  background:
+    radial-gradient(80% 60% at 50% 45%,rgba(63,208,255,.22),transparent 70%),
+    linear-gradient(170deg,#0F2B5E,#071733);
+  background-size:cover;background-position:center;
+}
+.ph.big{grid-column:1/-1;aspect-ratio:16/10}
+.ph .ph-art{position:absolute;inset:0;display:grid;place-items:center;color:rgba(143,227,255,.75)}
+.ph .ph-art svg{width:34%;max-width:120px;height:auto}
+.ph.has-photo .ph-art{display:none}
+.ph figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:28px 14px 12px;font-size:14px;font-weight:500;color:#fff;
+  background:linear-gradient(transparent,rgba(7,23,51,.82));
+}
+
+/* research */
+.rs{display:grid;gap:14px}
+.rs .card{gap:10px}
+.status{align-self:flex-start;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:#F1ECFF;color:#5B3FD6}
+.status.done{background:#E3F7EE;color:#137A4B}
+
+/* faq */
+.faq{display:grid;gap:10px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:0 18px}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-weight:600;font-size:16.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);position:relative}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.8px;background:var(--ink);transform:translate(-50%,-50%);transition:transform .25s}
+.faq summary i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq details[open] summary i::after{transform:translate(-50%,-50%) rotate(0)}
+.faq details[open] summary i{border-color:transparent;background:linear-gradient(#fff,#fff) padding-box,var(--iri) border-box;border:1.5px solid transparent}
+.faq .ans{padding:0 0 18px;color:var(--ink-2);font-size:15.5px}
+
+/* contact */
+.contact{
+  border-radius:var(--radius-lg);padding:30px 22px;color:#E6EEFF;
+  background:
+    radial-gradient(60% 60% at 100% 0%,rgba(63,208,255,.25),transparent 70%),
+    radial-gradient(50% 50% at 0% 100%,rgba(138,108,255,.25),transparent 70%),
+    var(--pool);
+}
+.contact h2{font-size:clamp(26px,6vw,40px);color:#fff}
+.contact .org{margin-top:8px;color:#B9CBEA;font-size:15.5px}
+.c-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:0;border-top:1px solid rgba(159,183,224,.2)}
+.c-list li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid rgba(159,183,224,.2);font-size:15.5px}
+.c-list span{color:#8FA6DE;font-size:14px}
+.c-list a{color:#fff;text-decoration-color:rgba(143,227,255,.5);text-underline-offset:3px}
+.c-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.c-actions .pill{width:100%}
+.c-actions .pill-ghost{background:rgba(255,255,255,.06);border-color:rgba(159,183,224,.3);color:#fff}
+.c-actions .pill-ghost:hover{border-color:rgba(159,183,224,.6)}
+.c-actions .pill-light{background:#fff;color:var(--pool)}
+
+footer{padding:36px 0 120px;color:var(--ink-3);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+/* bottom bar (mobile) + to-top */
+.bbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
+  transform:translateY(110%);transition:transform .3s ease;
+}
+.bbar.show{transform:none}
+.bbar .pill{width:100%}
+.totop{
+  position:fixed;right:16px;bottom:84px;z-index:41;width:44px;height:44px;border-radius:50%;
+  background:#fff;border:1.5px solid var(--line);display:grid;place-items:center;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 6px 18px rgba(14,26,43,.12);
+}
+.totop.show{opacity:1;pointer-events:auto}
+.totop svg{width:18px;height:18px}
+
+/* ---------- ≥ 720px ---------- */
+@media (min-width:720px){
+  :root{--gutter:32px}
+  body{font-size:17px}
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .stat,.stat:nth-child(even){padding:18px 14px 4px 16px;border-right:1px solid var(--line)}
+  .stat:first-child{padding-left:0}
+  .stat:last-child{border-right:0}
+  .how{grid-template-columns:repeat(3,1fr)}
+  .how li{padding:76px 22px 24px}
+  .how li::before{top:22px;left:22px}
+  .svc{grid-template-columns:1fr 1fr}
+  .finder{padding:30px 30px 30px}
+  .steps{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;column-gap:40px}
+  .steps li:nth-child(3)::after{display:none}
+  .safe{grid-template-columns:1fr 1fr;column-gap:40px}
+  .gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:220px}
+  .ph,.ph.big{aspect-ratio:auto}
+  .ph.big{grid-column:1/3;grid-row:1/3}
+  .rs{grid-template-columns:repeat(3,1fr)}
+  .hero-grid .pool{width:100%;max-width:620px;justify-self:center}
+  .contact{padding:44px 44px}
+  .c-actions{grid-template-columns:repeat(4,auto);justify-content:start}
+  .dark{margin:0 16px}
+}
+/* ---------- ≥ 1000px ---------- */
+@media (min-width:1000px){
+  .nav-links{display:flex}
+  .nav .pill{margin-left:8px}
+  .menu-btn,.mobile-menu{display:none !important}
+  .hero{padding:48px 0 80px}
+  .lbl-sec{padding:40px 0 24px}
+  .lbl-grid{grid-template-columns:minmax(0,560px) 1fr;gap:56px;align-items:center}
+  .hero-grid{grid-template-columns:1.05fr .95fr;grid-template-areas:"text pool" "stats pool";column-gap:56px;row-gap:32px}
+  .hero-text{grid-area:text;align-self:end}
+  .hero-grid .pool{grid-area:pool;align-self:center}
+  .hero-grid .stats{grid-area:stats;align-self:start}
+  .stat b{font-size:31px}
+  .svc{grid-template-columns:repeat(4,1fr)}
+  .sec{padding:96px 0}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .contact-grid .c-list{margin-top:0}
+  .c-actions{grid-template-columns:1fr 1fr}
+  .bbar{display:none}
+  .totop{bottom:24px}
+  footer{padding-bottom:40px}
+}
+/* ---------- side rail ≥ 1280px ---------- */
+@media (min-width:1280px){
+  :root{--rail:64px}
+  body{padding-left:var(--rail)}
+  .nav{margin-left:calc(var(--rail) * -1);padding-left:var(--rail)}
+  .rail{
+    display:flex;flex-direction:column;align-items:center;gap:18px;
+    position:fixed;left:0;top:var(--nav-h);bottom:0;width:var(--rail);z-index:30;padding:28px 0;
+  }
+  .rail-brand{writing-mode:vertical-rl;transform:rotate(180deg);font-size:12.5px;color:var(--ink-3);letter-spacing:.06em;white-space:nowrap}
+  .rail-line{position:relative;flex:1;width:2px;background:var(--line);border-radius:2px;overflow:hidden}
+  .rail-line i{position:absolute;left:0;top:0;width:100%;height:0;background:var(--iri)}
+  .rail-now{
+    writing-mode:vertical-rl;transform:rotate(180deg);font-size:12.5px;font-weight:600;color:var(--ink);
+    padding:10px 5px;border-radius:999px;background:#fff;border:1px solid var(--line);white-space:nowrap;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+<!-- โลโก้ สทน. (ฝังไว้ในไฟล์) -->
+<style>:root{--logo:url("data:image/webp;base64,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")}</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="top">
+  <div class="wrap">
+    <a class="brand" href="#hero" aria-label="Gamma Irradiation หน้าแรก">
+      <span class="logo" role="img" aria-label="สทน. TINT"></span>
+      <span class="brand-text"><b>Gamma Irradiation</b><small>สทน. สาขาคลองห้า</small></span>
+    </a>
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="#how">หลักการ</a>
+      <a href="#services">บริการ</a>
+      <a href="#dose">ปริมาณรังสี</a>
+      <a href="#process">ขั้นตอน</a>
+      <a href="#safety">ความปลอดภัย</a>
+      <a href="#faq">คำถาม</a>
+    </nav>
+    <a class="pill pill-dark" href="#contact">ติดต่อเรา</a>
+    <button class="menu-btn" type="button" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#how">หลักการทำงาน</a>
+  <a href="#services">บริการ</a>
+  <a href="#dose">ปริมาณรังสีที่ใช้</a>
+  <a href="#process">ขั้นตอนการขอใช้บริการ</a>
+  <a href="#safety">ความปลอดภัย</a>
+  <a href="#gallery">ภาพบรรยากาศ</a>
+  <a href="#faq">คำถามที่พบบ่อย</a>
+  <a href="#contact">ติดต่อเรา</a>
+</div>
+
+<aside class="rail" aria-hidden="true">
+  <span class="rail-brand">Gamma Irradiation&nbsp;&nbsp;TINT</span>
+  <span class="rail-line"><i id="railProg"></i></span>
+  <span class="rail-now" id="railNow">หน้าแรก</span>
+</aside>
+
+<main>
+<!-- BOX LABEL: shown only when the link has ?job=…&box=… -->
+<section class="lbl-sec" id="label" data-name="ฉลากกล่อง" hidden>
+  <div class="wrap lbl-grid">
+    <article class="lbl" id="lblCard" hidden>
+      <header class="lbl-head">
+        <span class="logo" role="img" aria-label="สทน. TINT"></span>
+        <div><b>Irradiated by</b><span>Thailand Institute of Nuclear Technology (TINT)</span></div>
+      </header>
+      <div class="lbl-status" id="lblStatus" hidden></div>
+      <div class="lbl-box"><span>กล่องที่</span><b id="lblBox"></b><small id="lblOf"></small></div>
+      <dl class="lbl-fields" id="lblFields"></dl>
+      <div class="lbl-job" id="lblJob"></div>
+      <div class="lbl-bar" id="lblBar"></div>
+      <p class="lbl-foot">ข้อมูลไม่ตรงกับฉลากบนกล่อง โทร <a href="tel:+6624019889,6101" target="_top">02 401 9889 ต่อ 6101–6103</a></p>
+    </article>
+    <div class="lbl lbl-loading" id="lblLoading" role="status" hidden>
+      <header class="lbl-head">
+        <span class="logo" role="img" aria-label="สทน. TINT"></span>
+        <div><b>Irradiated by</b><span>Thailand Institute of Nuclear Technology (TINT)</span></div>
+      </header>
+      <div class="lbl-box"><span>กล่องที่</span><b id="loadBox"></b></div>
+      <p class="load-msg"><i class="spin" aria-hidden="true"></i>กำลังโหลดข้อมูลกล่องจากระบบ…</p>
+      <span class="sk"></span><span class="sk"></span><span class="sk short"></span>
+    </div>
+    <div class="notice" id="notice" role="alert" hidden>
+      <b>เปิดข้อมูลกล่องนี้ไม่ได้</b>
+      <p id="noticeText"></p>
+      <p style="margin-top:8px">ติดต่อเจ้าหน้าที่ <a href="tel:+6624019889,6101" target="_top">02 401 9889 ต่อ 6101–6103</a></p>
+      <button class="pill pill-ghost retry" id="retry" type="button" hidden>ลองโหลดอีกครั้ง</button>
+    </div>
+    <div class="lbl-aside">
+      <h2>ข้อมูลนี้มาจากระบบงานฉายรังสีของ สทน.</h2>
+      <p>ใช้ตรวจว่ากล่องนี้อยู่ในงานใด ฉายรังสีวันไหน และกำหนดปริมาณรังสีขั้นต่ำ (Min Dose) ไว้เท่าไร</p>
+      <p>การฉายรังสีแกมมาไม่ทำให้สินค้ามีรังสีตกค้าง</p>
+      <a class="pill pill-ghost" href="#hero">รู้จักการฉายรังสีแกมมา</a>
+    </div>
+  </div>
+</section>
+
+<!-- HERO -->
+<section class="hero" id="hero" data-name="หน้าแรก">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <div class="wordmark" aria-hidden="true"><span class="w1">Gamma</span><span class="w2">Irradiation</span></div>
+      <h1><span class="nw">ฉายรังสีแกมมา</span> <span class="nw">ให้สินค้าปลอดเชื้อ</span> <span class="nw">ปลอดแมลง</span> <span class="nw">ทั้งที่ยังอยู่ในกล่อง</span></h1>
+      <p class="lede">บริการฉายรังสีด้วยโคบอลต์-60 สำหรับอาหาร สินค้าเกษตร เครื่องมือแพทย์ และตัวอย่างงานวิจัย โดยฝ่ายฉายรังสีแกมมา สถาบันเทคโนโลยีนิวเคลียร์แห่งชาติ (องค์การมหาชน) สาขาคลองห้า ปทุมธานี</p>
+      <div class="hero-cta">
+        <a class="pill pill-dark" href="tel:+6624019889,6101" target="_top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+          โทรสอบถาม
+        </a>
+        <a class="pill pill-ghost" href="#services">ดูบริการ</a>
+      </div>
+    </div>
+
+    <figure class="pool" style="margin:0">
+      <span class="pool-tag">ภาพจำลองหลักการ</span>
+      <svg id="orbit" viewBox="0 0 400 300" role="img" aria-labelledby="orbitTitle">
+        <title id="orbitTitle">ภาพจำลองตู้ฉาย 9 ตู้หมุนเวียนรอบแหล่งรังสีโคบอลต์-60 จนได้รับรังสีเท่ากันทุกตู้</title>
+        <defs>
+          <filter id="glow" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="7"/></filter>
+          <filter id="glow2" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="2.5"/></filter>
+          <linearGradient id="fillG" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2457E6"/><stop offset=".6" stop-color="#3FD0FF"/><stop offset="1" stop-color="#B9F0FF"/></linearGradient>
+          <linearGradient id="plaqueG" x1="0" x2="1"><stop offset="0" stop-color="#3FD0FF" stop-opacity=".2"/><stop offset=".5" stop-color="#E8FBFF"/><stop offset="1" stop-color="#3FD0FF" stop-opacity=".2"/></linearGradient>
+        </defs>
+        <ellipse cx="200" cy="150" rx="150" ry="94" fill="none" stroke="#9FB7E0" stroke-opacity=".22" stroke-dasharray="3 6"/>
+        <g id="rays"></g>
+        <g id="plaque">
+          <rect x="120" y="140" width="160" height="20" rx="10" fill="#3FD0FF" opacity=".55" filter="url(#glow)"/>
+          <rect x="128" y="146" width="144" height="8" rx="4" fill="url(#plaqueG)" filter="url(#glow2)"/>
+          <rect x="132" y="148" width="136" height="4" rx="2" fill="#F2FDFF"/>
+        </g>
+        <text x="200" y="176" text-anchor="middle" fill="#9FE6FF" font-size="11" font-family="Anuphan, sans-serif" letter-spacing=".5">แหล่งรังสีโคบอลต์-60</text>
+        <g id="carriers"></g>
+      </svg>
+      <figcaption class="pool-foot">
+        <p id="poolMsg">ตู้ฉายเวียนผ่านทุกตำแหน่งรอบแหล่งรังสี แถบสีฟ้าในตู้คือปริมาณรังสีที่สะสม</p>
+        <span class="pool-count"><small>ตำแหน่งที่</small><span id="poolStep">1</span>/9</span>
+      </figcaption>
+    </figure>
+
+    <div class="stats">
+      <div class="stat"><b>Co-60</b><span>แหล่งกำเนิดรังสีแกมมา</span></div>
+      <div class="stat"><b>9</b><span>ตู้ฉายหมุนรอบแหล่งรังสี</span></div>
+      <div class="stat"><b>0.05–50</b><span>ช่วงปริมาณรังสี (kGy) ตามชนิดงาน</span></div>
+      <div class="stat"><b>0</b><span>รังสีตกค้างในสินค้าหลังฉาย</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="sec dark" id="how" data-name="หลักการทำงาน">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">How it works</span>รังสีแกมมาทำงานอย่างไร</h2>
+      <p>การฉายรังสีเป็นกระบวนการเย็น ใช้พลังงานรังสีแทนความร้อนหรือสารเคมี</p>
+    </div>
+    <ol class="how">
+      <li>
+        <h3>แหล่งรังสีพักอยู่ใต้น้ำ</h3>
+        <p>โคบอลต์-60 ถูกเก็บในสระน้ำลึก น้ำทำหน้าที่กั้นรังสีระหว่างที่ไม่ได้ใช้งาน เมื่อเริ่มฉาย ระบบจะยกแหล่งรังสีขึ้นในห้องฉายที่ล้อมด้วยผนังคอนกรีตหนา</p>
+      </li>
+      <li>
+        <h3>ตู้ฉายหมุนรอบแหล่งรังสี</h3>
+        <p>สินค้าถูกจัดเข้าตู้ฉาย 9 ตู้ ที่เวียนผ่านทุกตำแหน่งรอบแหล่งรังสี ทุกกล่องจึงได้รับรังสีใกล้เคียงกัน</p>
+      </li>
+      <li>
+        <h3>รังสีหยุดการแบ่งตัวของเชื้อและแมลง</h3>
+        <p>รังสีทะลุผ่านบรรจุภัณฑ์และทำลาย DNA ของจุลินทรีย์และแมลง สินค้าแทบไม่ร้อนขึ้น และไม่มีรังสีตกค้าง</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services" data-name="บริการ">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">Services</span>งานที่เราให้บริการ</h2>
+      <p>รับฉายรังสีให้บุคคลทั่วไป บริษัทเอกชน และหน่วยงานรัฐ ตั้งแต่ตัวอย่างงานวิจัยไปจนถึงสินค้าทั้งพาเลท</p>
+    </div>
+    <div class="svc">
+      <article class="card">
+        <h3>อาหารและสินค้าเกษตร</h3>
+        <span class="dose-chip">0.1–10 kGy <i>ตามวัตถุประสงค์</i></span>
+        <p>ลดจุลินทรีย์ ยืดอายุการเก็บรักษา และกำจัดแมลงในโรงเก็บ</p>
+        <ul><li>เครื่องเทศ</li><li>สมุนไพร</li><li>อาหารแปรรูป</li><li>ธัญพืช</li><li>อาหารสัตว์เลี้ยง</li></ul>
+      </article>
+      <article class="card">
+        <h3>ผลไม้สดเพื่อส่งออก</h3>
+        <span class="dose-chip">0.4–1 kGy <i>กำจัดแมลง</i></span>
+        <p>ฉายรังสีกำจัดแมลงตามข้อกำหนดกักกันพืชของประเทศคู่ค้า เช่น การส่งออกผลไม้ไทยไปสหรัฐอเมริกา</p>
+        <ul><li>มะม่วง</li><li>ลำไย</li><li>มังคุด</li><li>ลิ้นจี่</li></ul>
+      </article>
+      <article class="card feature">
+        <span class="flag">งานที่กำลังขยายบริการ</span>
+        <h3>เครื่องมือแพทย์</h3>
+        <span class="dose-chip">15–35 kGy <i>ทำให้ปราศจากเชื้อ</i></span>
+        <p>ฆ่าเชื้อเครื่องมือแพทย์ใช้ครั้งเดียวในกล่องที่ปิดผนึกแล้ว กำหนดปริมาณรังสีตามแนวทาง ISO 11137</p>
+        <ul><li>ไซริงจ์</li><li>ถุงมือ</li><li>ชุดให้น้ำเกลือ</li><li>วัสดุทำแผล</li></ul>
+      </article>
+      <article class="card">
+        <h3>ตัวอย่างงานวิจัย</h3>
+        <span class="dose-chip">ตามแผนการทดลอง</span>
+        <p>ฉายตัวอย่างให้นักวิจัย นักศึกษา และหน่วยงาน ตามปริมาณรังสีที่ออกแบบไว้ พร้อมรายงานปริมาณรังสีที่วัดได้จริง</p>
+        <ul><li>วัสดุพอลิเมอร์</li><li>เมล็ดพันธุ์</li><li>ตัวอย่างทดสอบ</li></ul>
+      </article>
+    </div>
+    <p class="svc-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
+      <span>ทุกงานมีรายงานปริมาณรังสีจากดอซิมิเตอร์ และขอใบรับรองการฉายรังสีเพิ่มได้</span>
+    </p>
+  </div>
+</section>
+
+<!-- DOSE FINDER -->
+<section class="sec" id="dose" data-name="ปริมาณรังสี" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">Dose finder</span>สินค้าของคุณใช้รังสีเท่าไร</h2>
+      <p>เลือกประเภทสินค้าเพื่อดูวัตถุประสงค์และช่วงปริมาณรังสีที่ใช้โดยทั่วไป หน่วย kGy (กิโลเกรย์) คือพลังงานรังสี 1,000 จูลต่อสินค้า 1 กิโลกรัม</p>
+    </div>
+    <div class="finder">
+      <div class="chips" role="group" aria-label="เลือกประเภทสินค้า" id="chips"></div>
+      <div class="result" aria-live="polite">
+        <div class="result-top">
+          <div><h3 id="rName"></h3><p class="purpose" id="rPurpose"></p></div>
+          <div class="result-range" id="rRange"></div>
+        </div>
+        <div class="scale" aria-hidden="true">
+          <div class="scale-track"></div>
+          <div class="scale-band" id="rBand"></div>
+          <div id="ticks"></div>
+        </div>
+        <p class="result-note" id="rNote"></p>
+      </div>
+      <p class="finder-foot">ตัวเลขเป็นช่วงค่าโดยทั่วไปเพื่อประกอบความเข้าใจ ปริมาณรังสีจริงกำหนดจากข้อกำหนดของลูกค้า ผลการทดสอบ และประกาศของสำนักงานคณะกรรมการอาหารและยาสำหรับสินค้าอาหาร</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="process" data-name="ขั้นตอน" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">Process</span>ขั้นตอนการขอใช้บริการ</h2>
+      <p>ตั้งแต่ติดต่อครั้งแรกจนรับสินค้าคืน</p>
+    </div>
+    <ol class="steps">
+      <li><h3>ติดต่อและยื่นคำขอ</h3><p>แจ้งชนิดสินค้า จำนวน ขนาดกล่อง น้ำหนัก และปริมาณรังสีที่ต้องการ พร้อมกรอกแบบคำขอใช้บริการ</p></li>
+      <li><h3>ตรวจเอกสารและนัดวันฉาย</h3><p>เจ้าหน้าที่ตรวจข้อมูล คำนวณเวลาฉาย และนัดวันนำสินค้าเข้า</p></li>
+      <li><h3>รับสินค้าเข้า</h3><p>ตรวจนับสินค้าทีละพาเลท และตรวจ Lot ให้ตรงกับเอกสาร</p></li>
+      <li><h3>ฉายรังสี</h3><p>จัดสินค้าเข้าตู้ฉาย และวางดอซิมิเตอร์ไว้กับสินค้าเพื่อวัดปริมาณรังสีที่ได้รับจริง</p></li>
+      <li><h3>ตรวจวัดและออกรายงาน</h3><p>อ่านค่าดอซิมิเตอร์ ออกรายงานปริมาณรังสี และใบรับรองการฉายรังสีเมื่อลูกค้าร้องขอ</p></li>
+      <li><h3>รับสินค้าคืน</h3><p>ชำระค่าบริการ แล้วรับสินค้าและเอกสารกลับ</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="sec" id="safety" data-name="ความปลอดภัย" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">Safety</span>ปลอดภัยทั้งสินค้า คนทำงาน และชุมชน</h2>
+    </div>
+    <div class="safe">
+      <div class="safe-item">
+        <span class="safe-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><h3>ไม่มีรังสีตกค้าง</h3><p>พลังงานรังสีแกมมาจากโคบอลต์-60 ไม่สูงพอจะทำให้สินค้ากลายเป็นสารกัมมันตรังสี จึงนำสินค้าไปใช้ได้ทันทีหลังฉาย</p></div>
+      </div>
+      <div class="safe-item">
+        <span class="safe-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <div><h3>ระบบ interlock หลายชั้น</h3><p>หากประตูถูกเปิดหรือมีการกดปุ่มหยุดฉุกเฉิน ระบบจะลดแหล่งรังสีกลับลงสระน้ำโดยอัตโนมัติ</p></div>
+      </div>
+      <div class="safe-item">
+        <span class="safe-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <div><h3>ตรวจวัดรังสีทุกครั้งที่เข้าห้องฉาย</h3><p>เจ้าหน้าที่ถือเครื่องสำรวจรังสี และติดเครื่องวัดรังสีประจำตัว (OSL) ตลอดการทำงาน</p></div>
+      </div>
+      <div class="safe-item">
+        <span class="safe-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg></span>
+        <div><h3>อยู่ภายใต้การกำกับดูแล</h3><p>การใช้แหล่งรังสีได้รับอนุญาตและอยู่ภายใต้การกำกับของสำนักงานปรมาณูเพื่อสันติ (ปส.)</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec" id="gallery" data-name="ภาพบรรยากาศ" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">Facility</span>ภายในศูนย์ฉายรังสี</h2>
+    </div>
+    <div class="gallery">
+      <figure class="ph big" data-photo="building">
+        <span class="ph-art"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 56h52"/><path d="M10 56V26l22-14 22 14v30"/><path d="M26 56V40h12v16"/><circle cx="32" cy="27" r="4"/></svg></span>
+        <figcaption>อาคารเครื่องฉายรังสีแกมมา</figcaption>
+      </figure>
+      <figure class="ph" data-photo="control">
+        <span class="ph-art"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="12" width="48" height="30" rx="3"/><path d="M24 52h16M32 42v10"/><path d="M14 32l8-8 6 5 8-10 8 6 6-4"/></svg></span>
+        <figcaption>ห้องควบคุม</figcaption>
+      </figure>
+      <figure class="ph" data-photo="carrier">
+        <span class="ph-art"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="16" y="8" width="32" height="48" rx="2"/><path d="M16 24h32M16 40h32"/><path d="M32 4v4"/></svg></span>
+        <figcaption>ตู้ฉายบรรจุสินค้า</figcaption>
+      </figure>
+      <figure class="ph" data-photo="dosimetry">
+        <span class="ph-art"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M24 6h16M28 6v18L14 50a4 4 0 0 0 3.5 6h29a4 4 0 0 0 3.5-6L36 24V6"/><path d="M19 42h26"/></svg></span>
+        <figcaption>ห้องปฏิบัติการดอซิมิเตอร์</figcaption>
+      </figure>
+      <figure class="ph" data-photo="loading">
+        <span class="ph-art"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="10" y="18" width="20" height="20"/><rect x="34" y="18" width="20" height="20"/><rect x="22" y="2" width="20" height="16"/><path d="M6 42h52M10 42v8M32 42v8M54 42v8"/></svg></span>
+        <figcaption>พื้นที่รับและส่งสินค้า</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="sec" id="research" data-name="งานวิจัย" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">Innovation</span>งานวิจัยและนวัตกรรมจากทีม</h2>
+      <p>ทีมวิศวกรของฝ่ายพัฒนาเครื่องมือเพื่อให้การฉายรังสีแม่นยำและสม่ำเสมอขึ้น</p>
+    </div>
+    <div class="rs">
+      <article class="card">
+        <span class="status done">ยื่นขอรับสิทธิบัตรแล้ว</span>
+        <h3>อุปกรณ์หมุนภาชนะบรรจุสินค้า</h3>
+        <p>กลไกหมุนกล่องสินค้าระหว่างฉาย ให้ปริมาณรังสีภายในกล่องสม่ำเสมอขึ้น</p>
+      </article>
+      <article class="card">
+        <span class="status">อยู่ระหว่างพัฒนา</span>
+        <h3>AI ช่วยคำนวณเวลาฉายรังสี</h3>
+        <p>ใช้ข้อมูลการฉายย้อนหลังทำนายเวลาฉายและปริมาณรังสี ลดงานคำนวณด้วยมือ</p>
+      </article>
+      <article class="card">
+        <span class="status">แนวทางวิจัย</span>
+        <h3>อนุภาคเงินนาโนจากโปรตีนไหมไทย</h3>
+        <p>ใช้รังสีแกมมาสังเคราะห์อนุภาคเงินนาโนจากเซริซินในไหมไทย</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" data-name="คำถามที่พบบ่อย" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="serif">FAQ</span>คำถามที่พบบ่อย</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>อาหารที่ผ่านการฉายรังสีมีรังสีตกค้างไหม<i aria-hidden="true"></i></summary>
+        <div class="ans">ไม่มี รังสีแกมมาผ่านสินค้าไปเหมือนแสงผ่านกระจก พลังงานไม่สูงพอทำให้สินค้ากลายเป็นสารกัมมันตรังสี เปรียบได้กับกระเป๋าที่ผ่านเครื่องเอกซเรย์ที่สนามบิน</div>
+      </details>
+      <details>
+        <summary>ต้องแกะบรรจุภัณฑ์ก่อนฉายไหม<i aria-hidden="true"></i></summary>
+        <div class="ans">ไม่ต้อง รังสีทะลุผ่านกล่องได้ จึงฉายในบรรจุภัณฑ์สุดท้ายที่ปิดผนึกแล้ว ช่วยลดโอกาสปนเปื้อนซ้ำ ควรใช้บรรจุภัณฑ์ที่ทนรังสีได้ตามปริมาณที่ฉาย</div>
+      </details>
+      <details>
+        <summary>รสชาติและคุณค่าทางอาหารเปลี่ยนไปไหม<i aria-hidden="true"></i></summary>
+        <div class="ans">ที่ปริมาณรังสีที่ใช้ทั่วไป การเปลี่ยนแปลงมีน้อย ใกล้เคียงหรือน้อยกว่าการแปรรูปด้วยความร้อน องค์การอนามัยโลก (WHO) FAO และ IAEA ยืนยันความปลอดภัยของอาหารฉายรังสี</div>
+      </details>
+      <details>
+        <summary>อาหารฉายรังสีต้องติดฉลากอย่างไร<i aria-hidden="true"></i></summary>
+        <div class="ans">อาหารที่ผ่านการฉายรังสีต้องแสดงข้อความและสัญลักษณ์บนฉลากตามประกาศกระทรวงสาธารณสุข เจ้าหน้าที่ให้คำแนะนำได้เมื่อยื่นคำขอ</div>
+      </details>
+      <details>
+        <summary>ส่งตัวอย่างงานวิจัยปริมาณน้อยได้ไหม<i aria-hidden="true"></i></summary>
+        <div class="ans">ได้ แจ้งชนิดตัวอย่าง จำนวน และปริมาณรังสีที่ต้องการ เจ้าหน้าที่จะช่วยวางแผนการฉายและการวัดปริมาณรังสีให้</div>
+      </details>
+      <details>
+        <summary>ต้องเตรียมข้อมูลอะไรบ้าง<i aria-hidden="true"></i></summary>
+        <div class="ans">ชนิดสินค้า จำนวน ขนาดและน้ำหนักต่อกล่อง วัตถุประสงค์ของการฉาย และปริมาณรังสีที่ต้องการ (ถ้ามี) พร้อมแบบคำขอใช้บริการ</div>
+      </details>
+      <details>
+        <summary>ค่าบริการเท่าไร<i aria-hidden="true"></i></summary>
+        <div class="ans">ขึ้นกับจำนวนตู้ฉาย ปริมาณรังสี และชนิดงาน โทรหรือส่งอีเมลสอบถามอัตราล่าสุดได้ที่ช่องทางด้านล่าง</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact" data-name="ติดต่อเรา" style="padding-top:0">
+  <div class="wrap">
+    <div class="contact">
+      <div class="contact-grid">
+        <div>
+          <h2>ติดต่อขอใช้บริการ</h2>
+          <p class="org">ฝ่ายฉายรังสีแกมมา สถาบันเทคโนโลยีนิวเคลียร์แห่งชาติ (องค์การมหาชน) สาขาคลองห้า</p>
+          <div class="c-actions">
+            <a class="pill pill-light" href="tel:+6624019889,6101" target="_top">โทรเลย</a>
+            <a class="pill pill-ghost" href="mailto:tic@tint.or.th?subject=%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%96%E0%B8%B2%E0%B8%A1%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%89%E0%B8%B2%E0%B8%A2%E0%B8%A3%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B5" target="_top">ส่งอีเมล</a>
+            <a class="pill pill-ghost" href="https://www.google.com/maps/search/?api=1&query=%E0%B8%AA%E0%B8%96%E0%B8%B2%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%84%E0%B9%82%E0%B8%99%E0%B9%82%E0%B8%A5%E0%B8%A2%E0%B8%B5%E0%B8%99%E0%B8%B4%E0%B8%A7%E0%B9%80%E0%B8%84%E0%B8%A5%E0%B8%B5%E0%B8%A2%E0%B8%A3%E0%B9%8C%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4+%E0%B8%84%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B8%AB%E0%B9%89%E0%B8%B2" target="_blank" rel="noopener">เปิดแผนที่</a>
+            <a class="pill pill-ghost" href="https://www.tint.or.th" target="_blank" rel="noopener">เว็บไซต์ สทน.</a>
+          </div>
+        </div>
+        <ul class="c-list">
+          <li><span>ที่อยู่</span><div>37 หมู่ 3 เทคโนธานี ตำบลคลองห้า อำเภอคลองหลวง จังหวัดปทุมธานี 12120</div></li>
+          <li><span>โทรศัพท์</span><div><a href="tel:+6624019889,6101" target="_top">02 401 9889</a> <span class="nw">ต่อ 6101–6103</span></div></li>
+          <li><span>อีเมล</span><div><a href="mailto:tic@tint.or.th" target="_top">tic@tint.or.th</a></div></li>
+          <li><span>เวลาทำการ</span><div>จันทร์–ศุกร์ 08:30–16:30 น.<br>เว้นวันหยุดราชการ</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>ฝ่ายฉายรังสีแกมมา สถาบันเทคโนโลยีนิวเคลียร์แห่งชาติ (องค์การมหาชน)</span>
+    <span>สาขาคลองห้า ปทุมธานี</span>
+  </div>
+</footer>
+
+<div class="bbar" id="bbar">
+  <a class="pill pill-dark" href="tel:+6624019889,6101" target="_top">โทรสอบถาม</a>
+  <a class="pill pill-ghost" href="#contact">ช่องทางติดต่อ</a>
+</div>
+<button class="totop" id="totop" type="button" aria-label="กลับขึ้นด้านบน">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ลิงก์ Web app ของ Apps Script (ลงท้าย /exec) ที่ส่งข้อมูลฉลากมาให้หน้านี้ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbzGx688iNhibdEmJVz8uwMVhPVNSD5Zs5UeTArIwIRwU0U8OjRPH9uiUgRyMxYIShFx/exec';
+</script>
+<script>
+/* รูปในหัวข้อ "ภายในศูนย์ฉายรังสี": ใส่ลิงก์รูป (https://...) หรือ data:image/... ในเครื่องหมาย '' ช่องที่ว่างจะแสดงภาพประกอบแทน */
+window.PHOTOS = {
+  building:  '',
+  control:   '',
+  carrier:   '',
+  dosimetry: '',
+  loading:   ''
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script>
+/* ---------- box label: ?job=…&box=… ---------- */
+(function(){
+  const q = new URLSearchParams(location.search);
+  const job = (q.get('job') || '').trim();
+  const box = (q.get('box') || '').trim();
+  if (!job && !box) return;                       // ไม่มีพารามิเตอร์ = หน้าประชาสัมพันธ์อย่างเดียว
+
+  const sec = document.getElementById('label');
+  const loading = document.getElementById('lblLoading');
+  const notice = document.getElementById('notice');
+  const retry = document.getElementById('retry');
+  sec.hidden = false;
+
+  function showNotice(text, canRetry){
+    loading.hidden = true;
+    document.getElementById('noticeText').textContent = text;
+    retry.hidden = !canRetry;
+    notice.hidden = false;
+  }
+
+  if (!job || !box) { showNotice('ลิงก์ไม่ครบ ต้องมีทั้งรหัสงานและเลขกล่อง'); return; }
+
+  function load(){
+    notice.hidden = true;
+    document.getElementById('loadBox').textContent = /^\d+$/.test(box) ? box : '';
+    loading.hidden = false;
+    const url = API_URL + '?api=1&job=' + encodeURIComponent(job) + '&box=' + encodeURIComponent(box);
+    const ctrl = ('AbortController' in window) ? new AbortController() : null;
+    const timer = setTimeout(() => ctrl && ctrl.abort(), 25000);
+    // credentials:'omit' = ไม่ส่งการล็อกอิน Google ไปด้วย จึงไม่เจอปัญหาหลายบัญชี
+    fetch(url, { credentials: 'omit', signal: ctrl ? ctrl.signal : undefined })
+      .then(r => r.json())
+      .then(d => {
+        clearTimeout(timer);
+        if (d && d.ok && d.label) { loading.hidden = true; render(d.label); }
+        else showNotice((d && d.notice) || 'ไม่พบข้อมูลกล่องนี้');
+      })
+      .catch(() => { clearTimeout(timer); showNotice('โหลดข้อมูลไม่สำเร็จ ตรวจอินเทอร์เน็ตแล้วลองอีกครั้ง', true); });
+  }
+  retry.addEventListener('click', load);
+  load();
+
+function render(L){
+  document.title = 'กล่องที่ ' + L.box + ' | Job ' + L.jobNo + ' | สทน.';
+  document.getElementById('lblCard').hidden = false;
+  document.getElementById('lblBox').textContent = L.box;
+  document.getElementById('lblOf').textContent = 'จาก ' + L.quantity + ' กล่อง';
+  document.getElementById('lblJob').textContent = 'Job No. ' + L.jobNo;
+
+  const st = document.getElementById('lblStatus');
+  const ICON_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>';
+  const ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>';
+  if (L.status === 'done') {
+    st.className = 'lbl-status done'; st.innerHTML = ICON_OK; st.append('ผ่านการฉายรังสีแกมมาแล้ว'); st.hidden = false;
+  } else if (L.status === 'planned') {
+    st.className = 'lbl-status planned'; st.innerHTML = ICON_CAL; st.append('กำหนดฉายรังสี ' + L.date); st.hidden = false;
+  }
+
+  const fields = [
+    ['Product', L.product],
+    ['Company', L.company],
+    ['Irradiation date', L.date],
+    ['Quantity', L.quantity + ' boxes'],
+    ['Min Dose', L.minDose + ' kGy']
+  ];
+  const dl = document.getElementById('lblFields');
+  fields.forEach(([k, v]) => {
+    const row = document.createElement('div');
+    const dt = document.createElement('dt'); dt.textContent = k;
+    const dd = document.createElement('dd'); dd.textContent = v;
+    row.append(dt, dd); dl.appendChild(row);
+  });
+
+  const bar = document.getElementById('lblBar');
+  const code = String(L.barcode || '').trim();
+  if (code) {
+    const ean = /^\d{13}$/.test(code) && (() => {
+      let s = 0; for (let i = 0; i < 12; i++) s += (+code[i]) * (i % 2 ? 3 : 1);
+      return (10 - s % 10) % 10 === +code[12];
+    })();
+    let drawn = false;
+    if (window.JsBarcode) {
+      try {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        bar.appendChild(svg);
+        JsBarcode(svg, code, { format: ean ? 'EAN13' : 'CODE128', width: 2, height: 64, fontSize: 16, margin: 4, font: 'Anuphan, sans-serif', textMargin: 4 });
+        drawn = true;
+      } catch (e) { bar.innerHTML = ''; }
+    }
+    if (!drawn) { const s = document.createElement('span'); s.className = 'num'; s.textContent = 'เลขบาร์โค้ด ' + code; bar.appendChild(s); }
+  }
+}
+})();
+</script>
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- mobile menu ---------- */
+  const btn = document.querySelector('.menu-btn');
+  function setMenu(open){
+    document.body.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+  }
+  btn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  document.querySelectorAll('#mobileMenu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  /* ---------- photos (see PHOTOS at the bottom of the page) ---------- */
+  document.querySelectorAll('[data-photo]').forEach(el => {
+    const src = (window.PHOTOS || {})[el.getAttribute('data-photo')];
+    if (!src) return;
+    const im = new Image();
+    im.onload = () => { el.style.backgroundImage = 'url("' + src + '")'; el.classList.add('has-photo'); };
+    im.src = src;
+  });
+
+  /* ---------- active section: nav + rail ---------- */
+  const secs = [...document.querySelectorAll('main section[id]')].filter(s => !s.hidden);
+  const links = [...document.querySelectorAll('.nav-links a')];
+  const railNow = document.getElementById('railNow');
+  const railProg = document.getElementById('railProg');
+  const bbar = document.getElementById('bbar');
+  const totop = document.getElementById('totop');
+  const hero = document.getElementById('hero');
+  function onScroll(){
+    const y = window.scrollY;
+    const mid = y + window.innerHeight * 0.35;
+    let cur = secs[0];
+    for (const s of secs) if (s.offsetTop <= mid) cur = s;
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur.id));
+    if (railNow.textContent !== cur.dataset.name) railNow.textContent = cur.dataset.name;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    railProg.style.height = (max > 0 ? (y / max) * 100 : 0) + '%';
+    const past = y > 480;
+    bbar.classList.toggle('show', past);
+    totop.classList.toggle('show', past);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  totop.addEventListener('click', () => window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'}));
+
+  /* ---------- dose finder ---------- */
+  const items = [
+    {c:'หอม กระเทียม', n:'หอม กระเทียม มันฝรั่ง', p:'ยับยั้งการงอก', lo:0.05, hi:0.15, note:'ใช้ปริมาณรังสีต่ำมาก ช่วยให้เก็บได้นานขึ้นโดยไม่แตกหน่อ'},
+    {c:'ผลไม้ส่งออก', n:'ผลไม้สดส่งออก', p:'กำจัดแมลงตามข้อกำหนดกักกันพืช', lo:0.4, hi:1, note:'เช่น มะม่วง ลำไย มังคุด ที่ส่งออกไปสหรัฐอเมริกา ต้องได้รับรังสีไม่ต่ำกว่า 0.4 kGy'},
+    {c:'ข้าว ธัญพืช', n:'ข้าว ธัญพืช ถั่ว', p:'กำจัดแมลงในโรงเก็บ', lo:0.2, hi:1, note:'ทำให้แมลงที่ติดมากับเมล็ดเป็นหมันหรือตาย ลดความเสียหายระหว่างเก็บรักษา'},
+    {c:'อาหารทะเลแช่แข็ง', n:'อาหารทะเลและเนื้อสัตว์แช่แข็ง', p:'ลดเชื้อก่อโรค เช่น ซัลโมเนลลา', lo:1, hi:7, note:'ฉายได้ทั้งที่ยังแช่แข็งอยู่ในบรรจุภัณฑ์'},
+    {c:'เครื่องเทศ สมุนไพร', n:'เครื่องเทศ สมุนไพร ผงแห้ง', p:'ลดจุลินทรีย์และยืดอายุ', lo:5, hi:10, note:'ใช้แทนการรมด้วยสารเคมี และไม่ทำให้กลิ่นหอมระเหยไปเหมือนการใช้ความร้อน'},
+    {c:'เครื่องมือแพทย์', n:'เครื่องมือแพทย์', p:'ทำให้ปราศจากเชื้อ', lo:15, hi:35, note:'ปริมาณรังสีกำหนดจากการตรวจเชื้อตั้งต้น (bioburden) และการทวนสอบตาม ISO 11137 ค่าที่ใช้บ่อยคือ 25 kGy'}
+  ];
+  const MIN = 0.05, MAX = 50;
+  const pos = v => (Math.log10(v) - Math.log10(MIN)) / (Math.log10(MAX) - Math.log10(MIN)) * 100;
+  const fmt = v => (v < 1 ? String(v) : String(v));
+  const chips = document.getElementById('chips');
+  const ticks = document.getElementById('ticks');
+  [0.1, 1, 10, 50].forEach(t => {
+    const s = document.createElement('span');
+    s.className = 'scale-tick'; s.style.left = pos(t) + '%';
+    s.textContent = t === 50 ? '50 kGy' : t;
+    if (t === 50) s.style.transform = 'translateX(-100%)';
+    ticks.appendChild(s);
+  });
+  function show(i){
+    const it = items[i];
+    chips.querySelectorAll('.chip').forEach((c, k) => c.setAttribute('aria-pressed', k === i));
+    document.getElementById('rName').textContent = it.n;
+    document.getElementById('rPurpose').textContent = it.p;
+    document.getElementById('rRange').innerHTML = fmt(it.lo) + '–' + fmt(it.hi) + '<small>kGy</small>';
+    const band = document.getElementById('rBand');
+    const a = pos(it.lo), b = pos(it.hi);
+    band.style.left = a + '%';
+    band.style.width = Math.max(b - a, 2.5) + '%';
+    document.getElementById('rNote').textContent = it.note;
+  }
+  items.forEach((it, i) => {
+    const c = document.createElement('button');
+    c.type = 'button'; c.className = 'chip'; c.textContent = it.c;
+    c.addEventListener('click', () => show(i));
+    chips.appendChild(c);
+  });
+  show(0);
+
+  /* ---------- orbit animation ---------- */
+  const NS = 'http://www.w3.org/2000/svg';
+  const N = 9, CX = 200, CY = 150, RX = 150, RY = 94;
+  const W = 28, H = 36, FH = 30;
+  const angAt = i => -Math.PI / 2 + i * 2 * Math.PI / N;
+  const ptAt = a => [CX + RX * Math.cos(a), CY + RY * Math.sin(a)];
+  // relative dose rate at each position ~ 1/d^2 from the nearest point of the source plaque
+  const near = (x, y) => [Math.max(132, Math.min(268, x)), 150];
+  let wts = [...Array(N)].map((_, i) => { const [x, y] = ptAt(angAt(i)); const [px, py] = near(x, y); const d = Math.hypot(x - px, y - py); return 1 / (d * d); });
+  const sum = wts.reduce((a, b) => a + b, 0); wts = wts.map(w => w / sum);
+  const maxW = Math.max(...wts);
+
+  const gC = document.getElementById('carriers');
+  const gR = document.getElementById('rays');
+  const car = [];
+  for (let k = 0; k < N; k++){
+    const ray = document.createElementNS(NS, 'line');
+    ray.setAttribute('stroke', '#3FD0FF'); ray.setAttribute('stroke-width', '1.2');
+    ray.setAttribute('stroke-dasharray', '2 5'); ray.setAttribute('stroke-linecap', 'round');
+    gR.appendChild(ray);
+    const g = document.createElementNS(NS, 'g');
+    const body = document.createElementNS(NS, 'rect');
+    body.setAttribute('x', -W/2); body.setAttribute('y', -H/2); body.setAttribute('width', W); body.setAttribute('height', H);
+    body.setAttribute('rx', 3); body.setAttribute('fill', '#0D2550'); body.setAttribute('stroke', '#9FB7E0'); body.setAttribute('stroke-width', '1.2');
+    const fill = document.createElementNS(NS, 'rect');
+    fill.setAttribute('x', -W/2 + 4); fill.setAttribute('width', W - 8); fill.setAttribute('rx', 1.5); fill.setAttribute('fill', 'url(#fillG)');
+    const shelf = document.createElementNS(NS, 'path');
+    shelf.setAttribute('d', `M${-W/2} ${-H/6}H${W/2}M${-W/2} ${H/6}H${W/2}`);
+    shelf.setAttribute('stroke', '#9FB7E0'); shelf.setAttribute('stroke-opacity', '.35'); shelf.setAttribute('stroke-width', '1');
+    g.append(body, fill, shelf);
+    gC.appendChild(g);
+    car.push({g, fill, ray, dose: 0});
+  }
+  const stepEl = document.getElementById('poolStep');
+  const msgEl = document.getElementById('poolMsg');
+  const MSG_RUN = 'ตู้ฉายเวียนผ่านทุกตำแหน่งรอบแหล่งรังสี แถบสีฟ้าในตู้คือปริมาณรังสีที่สะสม';
+  const MSG_DONE = 'ครบ 9 ตำแหน่ง ทุกตู้ได้รับรังสีเท่ากัน';
+
+  function draw(step, moveT, dwellT){
+    // step: index of current dwell (0..8); moveT: 0..1 progress moving into this position
+    for (let k = 0; k < N; k++){
+      const c = car[k];
+      const from = angAt(k + step - 1), to = angAt(k + step);
+      const e = moveT < 1 ? (1 - Math.cos(Math.PI * moveT)) / 2 : 1;
+      const a = from + (to - from) * e;
+      const [x, y] = ptAt(a);
+      c.g.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)})`);
+      const posIdx = (k + step) % N;
+      let d = 0;
+      for (let t = 0; t < step; t++) d += wts[(k + t) % N];
+      if (moveT >= 1) d += wts[posIdx] * dwellT;
+      const h = Math.min(1, d) * FH;
+      c.fill.setAttribute('y', (H/2 - 3 - h).toFixed(2));
+      c.fill.setAttribute('height', h.toFixed(2));
+      const [px, py] = near(x, y);
+      c.ray.setAttribute('x1', px); c.ray.setAttribute('y1', py);
+      c.ray.setAttribute('x2', x.toFixed(2)); c.ray.setAttribute('y2', y.toFixed(2));
+      const op = moveT >= 1 ? 0.15 + 0.75 * (wts[posIdx] / maxW) * (0.6 + 0.4 * Math.sin(dwellT * Math.PI)) : 0.08;
+      c.ray.setAttribute('stroke-opacity', op.toFixed(3));
+    }
+  }
+
+  if (reduce){
+    draw(4, 1, 0.5);
+    stepEl.textContent = '5';
+  } else {
+    const MOVE = 650, DWELL = 1150, HOLD = 2200, DRAIN = 700;
+    const CYCLE = N * (MOVE + DWELL);
+    let t0 = null, visible = true, last = 0, acc = 0;
+    const io = new IntersectionObserver(es => { visible = es[0].isIntersecting; }, {threshold: 0.05});
+    io.observe(document.getElementById('orbit'));
+    function frame(ts){
+      if (t0 === null) t0 = ts;
+      const dt = ts - (last || ts); last = ts;
+      if (visible && !document.hidden) acc += Math.min(dt, 60);
+      const T = acc % (CYCLE + HOLD + DRAIN);
+      if (T < CYCLE){
+        const step = Math.floor(T / (MOVE + DWELL));
+        const r = T - step * (MOVE + DWELL);
+        const moveT = Math.min(1, r / MOVE);
+        const dwellT = Math.max(0, (r - MOVE) / DWELL);
+        draw(step, moveT, dwellT);
+        stepEl.textContent = String(step + 1);
+        if (msgEl.textContent !== MSG_RUN) msgEl.textContent = MSG_RUN;
+      } else if (T < CYCLE + HOLD){
+        draw(N - 1, 1, 1);
+        stepEl.textContent = '9';
+        if (msgEl.textContent !== MSG_DONE) msgEl.textContent = MSG_DONE;
+      } else {
+        // drain: fade fills back to zero, carriers stay put
+        const f = 1 - (T - CYCLE - HOLD) / DRAIN;
+        draw(N - 1, 1, 1);
+        car.forEach(c => { const h = FH * Math.max(0, f); c.fill.setAttribute('y', (H/2 - 3 - h).toFixed(2)); c.fill.setAttribute('height', h.toFixed(2)); c.ray.setAttribute('stroke-opacity', '0.08'); });
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
