@@ -1051,6 +1051,10 @@ function fitAll(svg){
 function barcode(svg, code, x, y, w, h){
   code = String(code || '').trim();
   if (!code) return;
+  if (/^\d{12}$/.test(code)) {   // 12 หลัก: เติมหลักตรวจสอบ EAN-13 ให้เอง (เหมือน NiceLabel)
+    let t = 0; for (let i = 0; i < 12; i++) t += (+code[i]) * (i % 2 ? 3 : 1);
+    code += (10 - t % 10) % 10;
+  }
   const ean = /^\d{13}$/.test(code) && (() => {
     let s = 0; for (let i = 0; i < 12; i++) s += (+code[i]) * (i % 2 ? 3 : 1);
     return (10 - s % 10) % 10 === +code[12];
