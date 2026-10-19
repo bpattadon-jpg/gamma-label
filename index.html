@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#071733">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Serif+Thai:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme: light;
@@ -158,6 +158,15 @@ p{margin:0}
 @keyframes sk{from{background-position:100% 0}to{background-position:-100% 0}}
 .retry{margin-top:14px;background:#fff;border-color:#F0CF86}
 @media (prefers-reduced-motion:reduce){.spin,.sk{animation:none}}
+/* sticker replica (drawn in SVG at the real label proportions) */
+.lbl-wrap{width:100%;max-width:560px}
+.lbl-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;margin-bottom:12px}
+.lbl-top .lbl-status{margin-top:0}
+.lbl-count{font-size:14.5px;color:var(--ink-2)}
+.sticker{background:#fff;border:1.5px solid #1b1b1b;border-radius:10px;box-shadow:6px 7px 0 #1b1b1b;overflow:hidden}
+.sticker > svg{display:block;width:100%;height:auto}
+.sticker.portrait{max-width:440px}
+.lbl-wrap .lbl-foot{border-top:0;margin-top:16px;text-align:left}
 [hidden]{display:none !important}
 
 /* ---------- HERO ---------- */
@@ -515,21 +524,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 <!-- BOX LABEL: shown only when the link has ?job=…&box=… -->
 <section class="lbl-sec" id="label" data-name="ฉลากกล่อง" hidden>
   <div class="wrap lbl-grid">
-    <article class="lbl" id="lblCard" hidden>
-      <header class="lbl-head">
-        <span class="tic" role="img" aria-label="Thai Irradiation Center (TIC)"></span>
-        <div class="lbl-title"><b id="lblTitle">Irradiated by</b><strong class="lbl-sterile" id="lblSterile" hidden>STERILE</strong></div>
-        <span class="logo" role="img" aria-label="สทน. TINT"></span>
-      </header>
-      <p class="lbl-addr">Thai Irradiation Center (TIC)<br>Thailand Institute of Nuclear Technology (TINT)<br>37 Moo 3, Technopolis, Klong 5, Klong Luang,<br>Pathumthani 12120 Thailand<br>www.tint.or.th</p>
-      <div class="lbl-status" id="lblStatus" hidden></div>
-      <div class="lbl-mid">
-        <div class="lbl-box"><span>กล่องที่</span><b id="lblBox"></b><small id="lblOf"></small></div>
-        <span class="radura" id="lblRadura" role="img" aria-label="สัญลักษณ์ Radura ผ่านการฉายรังสี" hidden></span>
+    <article class="lbl-wrap" id="lblCard" hidden>
+      <div class="lbl-top">
+        <div class="lbl-status" id="lblStatus" hidden></div>
+        <span class="lbl-count" id="lblOf"></span>
       </div>
-      <dl class="lbl-fields" id="lblFields"></dl>
-      <div class="lbl-job" id="lblJob"></div>
-      <div class="lbl-bar" id="lblBar"></div>
+      <div class="sticker" id="sticker"></div>
       <p class="lbl-foot">ข้อมูลไม่ตรงกับฉลากบนกล่อง โทร <a href="tel:+6624019889,6101" target="_top">02 401 9889 ต่อ 6101–6103</a></p>
     </article>
     <div class="lbl lbl-loading" id="lblLoading" role="status" hidden>
@@ -949,12 +949,7 @@ function render(L){
   const card = document.getElementById('lblCard');
   card.dataset.type = type;
   card.hidden = false;
-  document.getElementById('lblTitle').textContent = type === 'fruit' ? 'Treated by Irradiation' : 'Irradiated by';
-  document.getElementById('lblSterile').hidden = type !== 'medical';
-  document.getElementById('lblRadura').hidden = !(type === 'food' || type === 'fruit');
-  document.getElementById('lblBox').textContent = L.box;
-  document.getElementById('lblOf').textContent = 'จาก ' + L.quantity + ' กล่อง';
-  document.getElementById('lblJob').textContent = (type === 'fruit' ? 'TIN (Job No.) ' : 'Job No. ') + L.jobNo;
+  document.getElementById('lblOf').textContent = 'กล่องที่ ' + L.box + ' จาก ' + L.quantity + ' กล่อง';
 
   const st = document.getElementById('lblStatus');
   const ICON_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>';
@@ -965,45 +960,135 @@ function render(L){
     st.className = 'lbl-status planned'; st.innerHTML = ICON_CAL; st.append('กำหนดฉายรังสี ' + L.date); st.hidden = false;
   }
 
-  const fields = type === 'fruit' ? [
-    ['Product', L.product],
-    ['Company', L.company],
-    ['Treatment Date', L.date],
-    ['TFC', L.tfc || '—'],
-    ['Quantity', L.quantity + ' boxes']
-  ] : [
-    ['Product', L.product],
-    ['Company', L.company],
-    ['Irradiation date', L.date],
-    ['Quantity', L.quantity + ' boxes'],
-    ['Min Dose', L.minDose + ' kGy']
-  ];
-  const dl = document.getElementById('lblFields');
-  fields.forEach(([k, v]) => {
-    const row = document.createElement('div');
-    const dt = document.createElement('dt'); dt.textContent = k;
-    const dd = document.createElement('dd'); dd.textContent = v;
-    row.append(dt, dd); dl.appendChild(row);
-  });
+  drawSticker(L, type);
+}
 
-  const bar = document.getElementById('lblBar');
-  const code = String(L.barcode || '').trim();
-  if (code) {
-    const ean = /^\d{13}$/.test(code) && (() => {
-      let s = 0; for (let i = 0; i < 12; i++) s += (+code[i]) * (i % 2 ? 3 : 1);
-      return (10 - s % 10) % 10 === +code[12];
-    })();
-    let drawn = false;
-    if (window.JsBarcode) {
-      try {
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        bar.appendChild(svg);
-        JsBarcode(svg, code, { format: ean ? 'EAN13' : 'CODE128', width: 2, height: 64, fontSize: 16, margin: 4, font: 'Anuphan, sans-serif', textMargin: 4 });
-        drawn = true;
-      } catch (e) { bar.innerHTML = ''; }
-    }
-    if (!drawn) { const s = document.createElement('span'); s.className = 'num'; s.textContent = 'เลขบาร์โค้ด ' + code; bar.appendChild(s); }
+/* ---------- sticker drawing: same layout as the NiceLabel designs ---------- */
+const NS = 'http://www.w3.org/2000/svg';
+const SERIF = "'Times New Roman', Times, 'Noto Serif Thai', 'Sarabun', serif";
+const SANS = "Arial, Helvetica, 'Noto Sans Thai', sans-serif";
+function art(name){
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const m = v.match(/^url\(["']?(.*?)["']?\)$/);
+  return m ? m[1] : '';
+}
+function node(parent, tag, attrs, text){
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (text != null) n.textContent = text;
+  parent.appendChild(n);
+  return n;
+}
+// text with a bold label and a normal value, e.g. "Product : ยาเขียว"; shrinks to fit maxW like NiceLabel
+function field(svg, x, y, size, label, value, maxW, opts){
+  const o = opts || {};
+  const t = node(svg, 'text', { x: x, y: y, 'font-family': SERIF, 'font-size': size, fill: '#111' });
+  if (o.anchor) t.setAttribute('text-anchor', o.anchor);
+  node(t, 'tspan', { 'font-weight': 700 }, label);
+  node(t, 'tspan', { 'font-weight': o.valueWeight || 700 }, value);
+  t.dataset.maxw = maxW;
+  return t;
+}
+function fitAll(svg){
+  svg.querySelectorAll('text[data-maxw]').forEach(t => {
+    t.removeAttribute('textLength');
+    try {
+      const max = +t.dataset.maxw, w = t.getComputedTextLength();
+      if (w > max) { t.setAttribute('textLength', max); t.setAttribute('lengthAdjust', 'spacingAndGlyphs'); }
+    } catch (e) {}
+  });
+}
+function barcode(svg, code, x, y, w, h){
+  code = String(code || '').trim();
+  if (!code) return;
+  const ean = /^\d{13}$/.test(code) && (() => {
+    let s = 0; for (let i = 0; i < 12; i++) s += (+code[i]) * (i % 2 ? 3 : 1);
+    return (10 - s % 10) % 10 === +code[12];
+  })();
+  if (window.JsBarcode) {
+    try {
+      const b = node(svg, 'svg', {});
+      const draw = (barH, fs) => JsBarcode(b, code, { format: ean ? 'EAN13' : 'CODE128', width: 2, height: barH, fontSize: fs, font: 'Arial', fontOptions: 'bold', margin: 0, textMargin: 1, background: 'transparent' });
+      // วาดรอบแรกเพื่อวัดความกว้าง แล้ววาดใหม่ให้เต็มกรอบโดยไม่บิดสัดส่วนแท่ง/ตัวเลข
+      draw(60, 16);
+      const sc = w / parseFloat(b.getAttribute('width'));
+      const fs = Math.max(8, Math.round(0.2 * h / sc));
+      draw(Math.max(10, h / sc - fs - 1), fs);
+      const bw = parseFloat(b.getAttribute('width')), bh = parseFloat(b.getAttribute('height'));
+      b.removeAttribute('style');
+      b.setAttribute('viewBox', '0 0 ' + bw + ' ' + bh);
+      b.setAttribute('x', x); b.setAttribute('y', y); b.setAttribute('width', w); b.setAttribute('height', h);
+      b.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return;
+    } catch (e) {}
   }
+  node(svg, 'text', { x: x + w / 2, y: y + h / 2, 'text-anchor': 'middle', 'font-family': SANS, 'font-size': 22, 'font-weight': 700 }, code);
+}
+function img(svg, href, x, y, w, h, label){
+  if (!href) return;
+  const i = node(svg, 'image', { x: x, y: y, width: w, height: h, preserveAspectRatio: 'xMidYMid meet', role: 'img', 'aria-label': label });
+  i.setAttribute('href', href);
+}
+
+function drawSticker(L, type){
+  const box = document.getElementById('sticker');
+  box.innerHTML = '';
+  const TIC = art('--tic'), TINT = art('--logo'), RADURA = art('--radura');
+
+  if (type === 'fruit') {
+    // ฉลากผลไม้ส่งออก: แผ่นเดียวแนวนอน
+    box.className = 'sticker';
+    const svg = node(box, 'svg', { viewBox: '0 0 800 500', role: 'img', 'aria-label': 'ฉลากกล่องที่ ' + L.box });
+    img(svg, TIC, 40, 52, 68, 36, 'TIC');
+    const h1 = node(svg, 'text', { x: 116, y: 72, 'font-family': SANS, 'font-size': 17, 'font-weight': 700, fill: '#111' }, 'Thai Irradiation Center(TIC),Thailand Institute of Nuclear Technology (TINT)'); h1.dataset.maxw = 530;
+    const h2 = node(svg, 'text', { x: 116, y: 95, 'font-family': SANS, 'font-size': 17, 'font-weight': 700, fill: '#111' }, '37 Moo.3 , TECHNOPOLIS, Klong 5 ,Klong Luang, Pathumthani 12120 THAILAND'); h2.dataset.maxw = 545;
+    node(svg, 'text', { x: 118, y: 117, 'font-family': SANS, 'font-size': 17, 'font-weight': 700, fill: '#111' }, 'www.tint.or.th');
+    img(svg, TINT, 664, 52, 82, 52, 'TINT');
+    img(svg, RADURA, 333, 118, 56, 56, 'Radura');
+    node(svg, 'text', { x: 660, y: 160, 'text-anchor': 'middle', 'font-family': SERIF, 'font-size': 36, fill: '#111' }, String(L.box));
+    const comp = L.company ? ' (' + L.company + ')' : '';
+    field(svg, 44, 228, 34, 'Product :  ', L.product + comp + ' Treated by Irradiation', 712, { valueWeight: 400 });
+    field(svg, 48, 292, 31, 'Treatment Date:  ', L.date, 380);
+    field(svg, 752, 296, 34, 'TFC:  ', L.tfc || '—', 290, { anchor: 'end' });
+    field(svg, 48, 346, 31, 'TIN(Job No.): ', L.jobNo, 330);
+    field(svg, 392, 352, 34, 'Quantity: ', L.quantity + ' boxes', 360);
+    barcode(svg, L.barcode, 60, 368, 680, 120);
+    fitAll(svg);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitAll(svg));
+    return;
+  }
+
+  // ฉลากทั่วไป / อาหาร / เครื่องมือแพทย์: ครึ่งหนึ่งของแผ่นคู่ แนวตั้ง
+  box.className = 'sticker portrait';
+  const svg = node(box, 'svg', { viewBox: '0 0 400 500', role: 'img', 'aria-label': 'ฉลากกล่องที่ ' + L.box });
+  img(svg, TIC, 24, 24, 72, 38, 'TIC');
+  img(svg, TINT, 272, 16, 100, 62, 'TINT');
+  if (type === 'medical') {
+    node(svg, 'text', { x: 182, y: 42, 'text-anchor': 'middle', 'font-family': SANS, 'font-size': 20, 'font-weight': 700, fill: '#222' }, 'Irradiated by');
+    node(svg, 'text', { x: 182, y: 80, 'text-anchor': 'middle', 'font-family': SANS, 'font-size': 36, 'font-weight': 700, fill: '#111' }, 'STERILE');
+  } else {
+    node(svg, 'text', { x: 180, y: 52, 'text-anchor': 'middle', 'font-family': SANS, 'font-size': 24, 'font-weight': 700, fill: '#222' }, 'Irradiated by');
+  }
+  const addr = ['Thai Irradiation Center(TIC)', 'Thailand Institute of Nuclear Technology (TINT)', '37 Moo.3 , TECHNOPOLIS, Klong 5, Klong Luang,', 'Pathumthani 12120 THAILAND', 'www.tint.or.th'];
+  const ay = type === 'medical' ? 100 : 92;
+  addr.forEach((line, i) => {
+    const t = node(svg, 'text', { x: 104, y: ay + i * 12.6, 'font-family': SANS, 'font-size': 10.6, 'font-weight': 700, fill: '#222' }, line);
+    t.dataset.maxw = type === 'food' ? 170 : 260;
+  });
+  node(svg, 'text', { x: 50, y: ay + 34, 'text-anchor': 'middle', 'font-family': SERIF, 'font-size': 34, fill: '#111' }, String(L.box));
+  if (type === 'food') img(svg, RADURA, 290, 92, 62, 62, 'Radura');
+
+  const y0 = type === 'medical' ? 188 : 184, step = 39;
+  field(svg, 30, y0, 20, 'Product :  ', L.product, 344);
+  field(svg, 30, y0 + step, 20, 'Company :  ', L.company, 344);
+  field(svg, 30, y0 + step * 2, 20, 'Irradiation date :  ', L.date, 344);
+  field(svg, 30, y0 + step * 3, 20, 'Quantity :  ', L.quantity + '  boxes', 344);
+  field(svg, 30, y0 + step * 4, 20, 'Min Dose :  ', L.minDose + '  kGy', 344);
+  const job = node(svg, 'text', { x: 372, y: 392, 'text-anchor': 'end', 'font-family': SERIF, 'font-size': 29, 'font-weight': 700, fill: '#111' }, 'Job No. ' + L.jobNo);
+  job.dataset.maxw = 330;
+  barcode(svg, L.barcode, 28, 402, 346, 88);
+  fitAll(svg);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitAll(svg));
 }
 })();
 </script>
