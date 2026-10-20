@@ -342,7 +342,7 @@ section{position:relative}
 .safe-item p{color:var(--ink-2);font-size:15.5px;margin-top:4px}
 
 /* standards */
-.std{display:grid;gap:14px}
+.std{display:grid;gap:14px;align-items:start}
 .std-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px 22px;overflow:hidden}
 .std-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--iri)}
 .std-num{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:44px;line-height:1;letter-spacing:-.01em}
@@ -352,7 +352,8 @@ section{position:relative}
 .std-meta div{display:grid;grid-template-columns:104px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #EEF2F8;font-size:14px}
 .std-meta dt{color:var(--ink-3)}
 .std-meta dd{margin:0;font-weight:500}
-.std-card .pill{margin-top:14px;min-height:40px;font-size:14px}
+.std-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.std-btns .pill{min-height:40px;font-size:14px}
 .std-note{margin-top:16px;font-size:14.5px;color:var(--ink-2);display:flex;gap:10px;align-items:flex-start}
 .std-note svg{width:20px;height:20px;flex-shrink:0;margin-top:3px;color:var(--blue)}
 
@@ -766,15 +767,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <h2><span class="serif">Certification</span>มาตรฐานและการรับรอง</h2>
     </div>
     <div class="std">
-      <article class="std-card" data-cert="iso9001">
-        <span class="std-num">ISO 9001</span>
-        <span class="std-name">ระบบบริหารงานคุณภาพ</span>
-        <p>งานบริการทำตามขั้นตอนที่กำหนดเป็นเอกสาร ตรวจสอบย้อนกลับได้ทุกงาน</p>
-      </article>
       <article class="std-card" data-cert="iso13485">
         <span class="std-num">ISO 13485</span>
         <span class="std-name">ระบบบริหารคุณภาพสำหรับเครื่องมือแพทย์</span>
         <p>มาตรฐานที่ผู้ผลิตเครื่องมือแพทย์ใช้ประเมินผู้ให้บริการทำให้ปราศจากเชื้อ</p>
+      </article>
+      <article class="std-card" data-cert="iso9001">
+        <span class="std-num">ISO 9001</span>
+        <span class="std-name">ระบบบริหารงานคุณภาพ</span>
+        <p>งานบริการทำตามขั้นตอนที่กำหนดเป็นเอกสาร ตรวจสอบย้อนกลับได้ทุกงาน</p>
       </article>
     </div>
     <p class="std-note">
@@ -937,8 +938,28 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbzGx688iNhibdEmJVz8uwMV
 /* รายละเอียดใบรับรอง: กรอกเมื่อมีข้อมูล ช่องที่ว่างจะไม่แสดงบนเว็บ
    file = ลิงก์ไฟล์ใบรับรอง (PDF/รูป) ถ้าใส่ จะมีปุ่ม "ดูใบรับรอง" */
 window.CERTS = {
-  iso9001:  { body: '', number: '', validUntil: '', file: '' },
-  iso13485: { body: '', number: '', validUntil: '', file: '' }
+  iso13485: {
+    standard: 'ISO 13485:2016 และ EN ISO 13485:2016',
+    body: 'BSI',
+    number: 'MD 775859',
+    scope: 'บริการทำให้ปราศจากเชื้อด้วยรังสีแกมมาและลำอิเล็กตรอนตาม EN ISO 11137-1:2015 และบริการตรวจวิเคราะห์ทางจุลชีววิทยาที่เกี่ยวข้อง',
+    since: '20 ธ.ค. 2565',
+    validUntil: '19 ธ.ค. 2571',
+    status: '',
+    file: 'certs/BSI-ISO13485-MD775859.pdf',
+    verify: 'https://www.bsigroup.com/ClientDirectory'
+  },
+  iso9001: {
+    standard: 'ISO 9001:2015',
+    body: 'Bureau Veritas Certification',
+    number: '',
+    scope: 'บริการฉายรังสีแกมมา (อาหาร เครื่องสำอาง เครื่องมือแพทย์ และสมุนไพร) ลำอิเล็กตรอน และรังสีเอกซ์ ที่ศูนย์คลองห้า',
+    since: '',
+    validUntil: '',
+    status: 'ผ่านการตรวจประเมินเมื่อ 3 ส.ค. 2569 อยู่ระหว่างออกใบรับรอง',
+    file: '',
+    verify: ''
+  }
 };
 window.PHOTOS = {
   building:  '',
@@ -1159,7 +1180,7 @@ window.keepTogether = (function(){
     'เครื่องสำรวจรังสี', 'เครื่องวัดรังสี', 'ประจำตัว', 'วัตถุประสงค์', 'ความปลอดภัย', 'ประเทศคู่ค้า', 'สหรัฐอเมริกา',
     'ซัลโมเนลลา', 'ตามชนิดงาน', 'แหล่งกำเนิดรังสี', 'แหล่งรังสี', 'ทุกด้าน', 'วัดได้จริง', 'สินค้าทั้งพาเลท', 'ช่องทางด้านล่าง', 'เมื่อลูกค้าร้องขอ', 'ปราศจากเชื้อ', 'รับส่งสินค้า', 'สินค้าอาหาร', 'อาหารสัตว์เลี้ยง', 'อาหารแปรรูป', 'ตัวอย่างงานวิจัย', 'งานวิจัย', 'เซริซิน', 'โปรตีน', 'นวัตกรรม',
     'วันหยุดราชการ', 'เทคโนธานี', 'ตำบลคลองห้า', 'อำเภอคลองหลวง', 'จังหวัดปทุมธานี 12120', 'ปทุมธานี',
-    'ISO 11137', 'ISO 9001', 'ISO 13485', 'หน่วยรับรอง', 'ตรวจติดตาม', 'Batch Mode', 'TINT e-Service', '02 401 9889', 'ต่อ 6101–6103', 'จันทร์–ศุกร์'
+    'ISO 11137', 'ISO 9001', 'ISO 13485', 'EN ISO 11137-1:2015', 'EN ISO 13485:2016', 'ISO 13485:2016', 'ISO 9001:2015', 'Bureau Veritas', 'MD 775859', 'ลำอิเล็กตรอน', 'รังสีเอกซ์', 'จุลชีววิทยา', 'ศูนย์คลองห้า', 'เครื่องสำอาง', 'อยู่ระหว่างออกใบรับรอง', 'หน่วยรับรอง', 'ตรวจติดตาม', 'Batch Mode', 'TINT e-Service', '02 401 9889', 'ต่อ 6101–6103', 'จันทร์–ศุกร์'
   ];
   const esc = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const RE = new RegExp('(' + WORDS.slice().sort((a, b) => b.length - a.length).map(esc).join('|') +
@@ -1210,16 +1231,20 @@ keepTogether(document.body);
   /* ---------- certificate details (see CERTS at the bottom of the page) ---------- */
   document.querySelectorAll('[data-cert]').forEach(card => {
     const c = (window.CERTS || {})[card.dataset.cert] || {};
-    const rows = [['หน่วยรับรอง', c.body], ['เลขที่ใบรับรอง', c.number], ['ใช้ได้ถึง', c.validUntil]].filter(r => String(r[1] || '').trim());
+    const rows = [['มาตรฐาน', c.standard], ['หน่วยรับรอง', c.body], ['เลขที่ใบรับรอง', c.number], ['ขอบข่าย', c.scope],
+                  ['รับรองครั้งแรก', c.since], ['ใช้ได้ถึง', c.validUntil], ['สถานะ', c.status]].filter(r => String(r[1] || '').trim());
     if (rows.length) {
       const dl = document.createElement('dl'); dl.className = 'std-meta';
       rows.forEach(([k, v]) => { const d = document.createElement('div'); const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; d.append(dt, dd); dl.appendChild(d); });
       card.appendChild(dl);
     }
-    if (String(c.file || '').trim()) {
-      const a = document.createElement('a'); a.className = 'pill pill-ghost'; a.href = c.file; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'ดูใบรับรอง';
-      card.appendChild(a);
+    const btns = [[c.file, 'ดูใบรับรอง'], [c.verify, 'ตรวจสอบกับหน่วยรับรอง']].filter(b => String(b[0] || '').trim());
+    if (btns.length) {
+      const row = document.createElement('div'); row.className = 'std-btns';
+      btns.forEach(([href, label]) => { const a = document.createElement('a'); a.className = 'pill pill-ghost'; a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label; row.appendChild(a); });
+      card.appendChild(row);
     }
+    if (window.keepTogether) keepTogether(card);
   });
 
   /* ---------- photos (see PHOTOS at the bottom of the page) ---------- */
