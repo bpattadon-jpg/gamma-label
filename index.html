@@ -1083,7 +1083,7 @@ function renderCert(L){
   const req = document.getElementById('certReq');
   const list = document.getElementById('certList');
   const wait = document.getElementById('certWait');
-  const cq = L.certQty;
+  const cq = L.certQty && !L.certQty.none && Number(L.certQty.boxes) > 0 ? L.certQty : null;   // ไม่ขอใบรับรอง = ไม่แสดงบรรทัดนี้
   const certs = Array.isArray(L.certs) ? L.certs.filter(c => c && Array.isArray(c.lots)) : [];
   list.innerHTML = '';
   if (!cq && !certs.length) { sec.hidden = true; return; }
