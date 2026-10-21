@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>นำเข้าใบรับรอง | ฝ่ายฉายรังสีแกมมา สทน.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#F4F7FC; --surface:#FFFFFF; --ink:#0E1A2B; --ink-2:#46566E; --ink-3:#7A889D;
+  --line:#DCE3EE; --line-2:#EEF2F8; --blue:#2457E6; --blue-bg:#EEF3FD;
+  --ok:#137A4B; --ok-bg:#E3F7EE; --warn:#8A5A00; --warn-bg:#FFF6E0; --warn-line:#F0CF86;
+  --err:#B42318; --err-bg:#FDECEA; --err-line:#F4B4AE;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Anuphan,"Noto Sans Thai",system-ui,sans-serif;font-size:16px;line-height:1.6}
+h1,h2,h3,p{margin:0}
+button,input{font:inherit}
+[hidden]{display:none !important}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.brand{color:var(--ink);text-decoration:none;line-height:1.25}
+.brand b{display:block;font-size:17px}
+.brand small{color:var(--ink-2);font-size:13px}
+.tag{flex-shrink:0;padding:4px 10px;border-radius:999px;background:var(--blue-bg);color:var(--blue);font-size:13px;font-weight:600}
+main.wrap{padding-top:28px;padding-bottom:64px}
+h1{font-size:clamp(24px,5vw,30px);line-height:1.3;text-wrap:balance}
+.lede{margin-top:8px;color:var(--ink-2);max-width:68ch}
+.privacy{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--ok-bg);color:#0E5A38;font-size:14.5px}
+.privacy svg{width:20px;height:20px;flex-shrink:0;margin-top:2px}
+.panel{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.panel > label{display:block;font-weight:600;margin-bottom:6px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row input[type=password],.row input[type=text]{flex:1 1 220px;min-width:0}
+input[type=password],input[type=text]{height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+input[type=password]:focus,input[type=text]:focus{outline:none;border-color:var(--blue)}
+.chk{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:14.5px;color:var(--ink-2);cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--ink-3)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.primary:hover{background:#1d2c44}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.msg{font-size:14.5px;margin-top:8px}
+.msg.ok{color:var(--ok)} .msg.err{color:var(--err)} .msg.info{color:var(--ink-2)}
+.drop{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin-top:16px;padding:34px 18px;border:2px dashed #B9C6DA;border-radius:var(--radius);background:var(--surface);text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--blue);background:var(--blue-bg)}
+.drop:focus-within{outline:2px solid var(--blue);outline-offset:2px}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop svg{width:36px;height:36px;color:var(--blue)}
+.drop b{font-size:17px}
+.drop span{color:var(--ink-2);font-size:14.5px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding:12px 0;background:var(--paper)}
+.bar .sum{font-size:15px;color:var(--ink-2)}
+.bar .sum b{color:var(--ink)}
+.bar .acts{display:flex;gap:8px;flex-wrap:wrap}
+.card{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.card[data-state=ready]{border-left-color:var(--blue)}
+.card[data-state=warn]{border-left-color:#E0A82E}
+.card[data-state=error],.card[data-state=failed]{border-left-color:var(--err)}
+.card[data-state=saved]{border-left-color:var(--ok)}
+.card-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.fname{font-weight:700;overflow-wrap:anywhere}
+.chip{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:600;vertical-align:2px;white-space:nowrap}
+.chip.ready{background:var(--blue-bg);color:var(--blue)}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.error,.chip.failed{background:var(--err-bg);color:var(--err)}
+.chip.saved{background:var(--ok-bg);color:var(--ok)}
+.chip.saving{background:var(--line-2);color:var(--ink-2)}
+.x{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--ink-2);font-size:20px;line-height:1;cursor:pointer}
+.x:hover{color:var(--err);border-color:var(--err-line)}
+.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px 18px;margin:12px 0 0}
+.f > div{padding:8px 0;border-bottom:1px solid var(--line-2);min-width:0}
+.f dt{font-size:13px;color:var(--ink-2);font-weight:600}
+.f dd{margin:2px 0 0;font-weight:500;overflow-wrap:anywhere}
+.f .wide{grid-column:1/-1}
+.jobs input{width:100%;margin-top:4px}
+.jobchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.jobchips span{padding:1px 9px;border-radius:999px;background:var(--line-2);font-size:13.5px;font-variant-numeric:tabular-nums}
+.jobchips em{font-style:normal;color:var(--err);font-size:13.5px}
+.warns{margin:12px 0 0;padding:10px 14px 10px 32px;border-radius:12px;background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn);font-size:14.5px}
+.warns.block{background:var(--err-bg);border-color:var(--err-line);color:var(--err)}
+.lots{margin-top:12px}
+.lots summary{cursor:pointer;font-weight:600;font-size:15px;color:var(--blue)}
+.lots summary .chk-ok{color:var(--ok);font-weight:600}
+.lots summary .chk-bad{color:var(--err);font-weight:600}
+.tbl{margin-top:8px;max-height:360px;overflow:auto;border:1px solid var(--line-2);border-radius:12px}
+.tbl table{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl th{position:sticky;top:0;background:#F7F9FC;text-align:left;padding:7px 12px;font-size:13px;color:var(--ink-2);font-weight:600}
+.tbl td{padding:6px 12px;border-top:1px solid var(--line-2);overflow-wrap:anywhere}
+.tbl .n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl .i{width:1%;color:var(--ink-3)}
+.tbl tfoot td{border-top:1.5px solid var(--line);font-weight:700}
+.ack{display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:14.5px;cursor:pointer}
+.ack input{width:18px;height:18px;margin-top:3px;accent-color:var(--blue);flex-shrink:0}
+.card-f{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+.card-f .msg{margin:0;flex:1 1 260px}
+.res{margin-top:4px}
+.help{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:4px 18px}
+.help summary{cursor:pointer;padding:12px 0;font-weight:600}
+.help ol{margin:0 0 14px;padding-left:22px;color:var(--ink-2)}
+.help li{margin:4px 0}
+.help code{background:var(--line-2);padding:1px 6px;border-radius:6px;font-size:14px}
+.spin{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--blue);animation:spin .8s linear infinite;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><b>Gamma Irradiation</b><small>สทน. สาขาคลองห้า</small></a>
+    <span class="tag">สำหรับเจ้าหน้าที่</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>นำเข้าข้อมูลใบรับรองการฉายรังสี</h1>
+  <p class="lede">อ่านเลข Lot และจำนวนกล่องจากไฟล์ PDF ใบรับรอง (FM-IC-02-71) แล้วบันทึกลง Google Sheets แท็บ Certs ลูกค้าจะเห็นเลข Lot เมื่อสแกน QR บนกล่องของ Job นั้น</p>
+  <p class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>ไฟล์ PDF ถูกอ่านในเครื่องนี้เท่านั้น ไม่ถูกอัปโหลดไปที่ใด ระบบบันทึกเฉพาะเลขที่ใบรับรอง วันที่ออก Job No. ชื่อบริษัทลูกค้า และรายการ Lot</span></p>
+
+  <section class="panel" aria-labelledby="keyLbl">
+    <label id="keyLbl" for="key">รหัสเจ้าหน้าที่</label>
+    <div class="row">
+      <input id="key" type="password" autocomplete="current-password" spellcheck="false">
+      <button class="btn" id="keyCheck" type="button">ตรวจรหัส</button>
+    </div>
+    <label class="chk"><input type="checkbox" id="remember"> จำรหัสไว้ในเครื่องนี้ (ใช้เฉพาะเครื่องของฝ่าย)</label>
+    <p class="msg" id="keyMsg" role="status" hidden></p>
+  </section>
+
+  <label class="drop" id="drop">
+    <input type="file" id="files" accept="application/pdf,.pdf" multiple aria-label="เลือกไฟล์ PDF ใบรับรอง">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg>
+    <b>ลากไฟล์ PDF ใบรับรองมาวางที่นี่</b>
+    <span>หรือคลิกเพื่อเลือกไฟล์ เลือกได้หลายไฟล์พร้อมกัน</span>
+  </label>
+  <p class="msg err" id="libMsg" role="alert" hidden></p>
+
+  <div class="bar" id="bar" hidden>
+    <span class="sum" id="sum"></span>
+    <div class="acts">
+      <button class="btn" id="clear" type="button">ล้างรายการ</button>
+      <button class="btn primary" id="saveAll" type="button">บันทึกทั้งหมด</button>
+    </div>
+  </div>
+  <div id="list"></div>
+
+  <details class="help">
+    <summary>วิธีใช้และข้อควรรู้</summary>
+    <ol>
+      <li>กรอกรหัสเจ้าหน้าที่ แล้วกด <b>ตรวจรหัส</b> (รหัสเดียวกับที่ตั้งไว้ใน Script Properties ชื่อ <code>CERT_KEY</code>)</li>
+      <li>ลากไฟล์ PDF ใบรับรองมาวาง ระบบจะอ่านเลขที่ใบรับรอง Job No. และตาราง Lot ให้ดูก่อน</li>
+      <li>ตรวจว่าผลรวมกล่องของทุก Lot ตรงกับ Total Quantity (ขึ้นเครื่องหมาย ✓) และ Job No. ถูกต้อง แก้ Job No. ได้ในช่องถ้าจำเป็น</li>
+      <li>กด <b>บันทึก</b> ทีละไฟล์ หรือ <b>บันทึกทั้งหมด</b> ถ้ามีคำเตือนสีเหลือง ต้องติ๊กยืนยันว่าตรวจกับไฟล์แล้วก่อน</li>
+      <li>บันทึกใบรับรองเลขที่เดิมซ้ำ ระบบจะเขียนทับแถวเดิม ไม่เพิ่มแถวใหม่</li>
+      <li>ใบรับรองที่ครอบคลุมหลาย Job (เช่น 12095.1-12095.2) จะแสดงเลข Lot ทั้งใบในหน้าฉลากของทุก Job นั้น</li>
+    </ol>
+  </details>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="cert-parse.js?v=1"></script>
+<script>
+(function(){
+  'use strict';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzGx688iNhibdEmJVz8uwMVhPVNSD5Zs5UeTArIwIRwU0U8OjRPH9uiUgRyMxYIShFx/exec';
+  const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  const KEY_STORE = 'gamma-cert-key';
+  const $ = id => document.getElementById(id);
+  const keyIn = $('key'), remember = $('remember'), keyMsg = $('keyMsg');
+  const list = $('list'), bar = $('bar'), sum = $('sum'), saveAll = $('saveAll');
+  const items = [];               // { id, file, res, jobsText, jobs, state, ack, el }
+  let seq = 0;
+
+  const store = {
+    get(){ try { return localStorage.getItem(KEY_STORE) || ''; } catch (e) { return ''; } },
+    set(v){ try { v ? localStorage.setItem(KEY_STORE, v) : localStorage.removeItem(KEY_STORE); } catch (e) {} }
+  };
+  const saved = store.get();
+  if (saved) { keyIn.value = saved; remember.checked = true; }
+  remember.addEventListener('change', () => store.set(remember.checked ? keyIn.value.trim() : ''));
+  keyIn.addEventListener('input', () => { if (remember.checked) store.set(keyIn.value.trim()); keyMsg.hidden = true; });
+
+  function el(tag, cls, text){ const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  const fmtN = n => Number(n || 0).toLocaleString('en-US');
+  function say(node, text, kind){ node.textContent = text; node.className = 'msg ' + (kind || 'info'); node.hidden = !text; }
+
+  if (!window.pdfjsLib || !window.CertParse) {
+    say($('libMsg'), 'โหลดตัวอ่าน PDF ไม่สำเร็จ ตรวจอินเทอร์เน็ตแล้วรีเฟรชหน้านี้', 'err');
+  } else {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js';
+  }
+
+  async function post(body){
+    const r = await fetch(API_URL, {
+      method: 'POST', credentials: 'omit', redirect: 'follow',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // text/plain = ไม่ต้อง preflight ข้ามโดเมน
+      body: JSON.stringify(body)
+    });
+    const t = await r.text();
+    try { return JSON.parse(t); } catch (e) { throw new Error('ระบบตอบกลับไม่ใช่ข้อมูลที่อ่านได้ (ตรวจว่า Deploy เวอร์ชันใหม่แล้ว)'); }
+  }
+  function needKey(){
+    const k = keyIn.value.trim();
+    if (!k) { say(keyMsg, 'กรอกรหัสเจ้าหน้าที่ก่อน', 'err'); keyIn.focus(); }
+    return k;
+  }
+
+  $('keyCheck').addEventListener('click', async () => {
+    const key = needKey(); if (!key) return;
+    const b = $('keyCheck'); b.disabled = true; say(keyMsg, 'กำลังตรวจรหัส…', 'info');
+    try {
+      const d = await post({ action: 'check', key });
+      say(keyMsg, d.ok ? 'รหัสถูกต้อง พร้อมบันทึก' : (d.notice || 'ตรวจรหัสไม่สำเร็จ'), d.ok ? 'ok' : 'err');
+    } catch (e) { say(keyMsg, e.message && /ระบบ/.test(e.message) ? e.message : 'ติดต่อระบบไม่ได้ ตรวจอินเทอร์เน็ตแล้วลองอีกครั้ง', 'err'); }
+    b.disabled = false;
+  });
+
+  // ---------- รับไฟล์ ----------
+  const drop = $('drop'), input = $('files');
+  ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+  input.addEventListener('change', () => { addFiles(input.files); input.value = ''; });
+  // วางไฟล์นอกกรอบ ไม่ให้เบราว์เซอร์เปิด PDF แทนหน้านี้
+  ['dragover', 'drop'].forEach(t => window.addEventListener(t, e => { if (!drop.contains(e.target)) e.preventDefault(); }));
+
+  async function addFiles(fileList){
+    for (const file of Array.from(fileList || [])) {
+      const it = { id: ++seq, file, res: null, jobsText: '', jobs: [], state: 'reading', ack: false, result: null, el: null };
+      items.push(it); draw(it); refresh();
+      try {
+        if (!/\.pdf$/i.test(file.name) && file.type !== 'application/pdf') throw new Error('ไม่ใช่ไฟล์ PDF');
+        if (!window.pdfjsLib) throw new Error('ตัวอ่าน PDF ยังไม่พร้อม');
+        it.res = await readPdf(file);
+        it.jobsText = it.res.jobText; it.jobs = it.res.jobs.slice();
+        it.state = classify(it);
+      } catch (e) {
+        it.state = 'error'; it.error = e.message || 'อ่านไฟล์ไม่สำเร็จ';
+      }
+      draw(it); refresh();
+    }
+  }
+
+  async function readPdf(file){
+    const data = new Uint8Array(await file.arrayBuffer());
+    // isEvalSupported:false ปิดการรันโค้ดจากฟอนต์ในไฟล์ PDF (ป้องกันไฟล์อันตราย)
+    const doc = await pdfjsLib.getDocument({ data, isEvalSupported: false, disableFontFace: true }).promise;
+    const pages = [];
+    let count = 0;
+    for (let p = 1; p <= doc.numPages; p++) {
+      const items = (await (await doc.getPage(p)).getTextContent()).items;
+      count += items.length; pages.push(items);
+    }
+    doc.destroy();
+    if (!count) throw new Error('ไฟล์นี้ไม่มีข้อความให้อ่าน (อาจเป็นไฟล์สแกนเป็นภาพ) ใช้ไฟล์ PDF ที่ส่งออกจากระบบออกใบรับรอง');
+    return CertParse.parseCertificate(pages);
+  }
+
+  // ข้อผิดพลาดที่บันทึกไม่ได้ / คำเตือนที่ต้องยืนยันก่อน
+  function problems(it){
+    const r = it.res, block = [], warn = [];
+    if (!r.ref) block.push('ไม่พบเลขที่ใบรับรอง (Reference No.)');
+    if (!it.jobs.length) block.push('ไม่พบ Job No. กรอกในช่อง Job No. ด้านบน');
+    if (!r.lots.length) block.push('ไม่พบรายการ Lot ในตาราง Details of products');
+    r.warnings.forEach(w => { if (!/Reference No|Job No|ไม่พบรายการ Lot/.test(w)) warn.push(w); });
+    const dup = items.find(o => o !== it && o.res && o.res.ref && o.res.ref === r.ref && o.state !== 'error');
+    if (dup && r.ref && dup.id < it.id) warn.push('มีไฟล์ใบรับรองเลขที่เดียวกันอยู่ในรายการแล้ว (' + dup.file.name + ') บันทึกซ้ำจะเขียนทับกัน');
+    return { block, warn };
+  }
+  function classify(it){
+    if (it.state === 'saved' || it.state === 'saving') return it.state;
+    const p = problems(it);
+    return p.block.length ? 'error' : p.warn.length ? 'warn' : 'ready';
+  }
+  function canSave(it){
+    if (it.state === 'ready') return true;
+    if (it.state === 'warn') return it.ack;
+    if (it.state === 'failed') { const p = problems(it); return !p.block.length && (!p.warn.length || it.ack); }
+    return false;
+  }
+
+  const CHIP = { reading: 'กำลังอ่านไฟล์…', ready: 'พร้อมบันทึก', warn: 'ตรวจคำเตือนก่อน', error: 'บันทึกไม่ได้', saving: 'กำลังบันทึก…', saved: 'บันทึกแล้ว', failed: 'บันทึกไม่สำเร็จ' };
+
+  function draw(it){
+    const card = it.el || el('article', 'card');
+    if (!it.el) { it.el = card; list.append(card); }
+    card.dataset.state = it.state;
+    card.innerHTML = '';
+    const head = el('div', 'card-h'), title = el('div');
+    title.append(el('span', 'fname', it.file.name));
+    const chip = el('span', 'chip ' + it.state, CHIP[it.state]);
+    if (it.state === 'reading' || it.state === 'saving') chip.prepend(el('i', 'spin'), ' ');
+    title.append(chip);
+    const x = el('button', 'x', '×'); x.type = 'button'; x.setAttribute('aria-label', 'นำ ' + it.file.name + ' ออกจากรายการ');
+    x.disabled = it.state === 'saving';
+    x.addEventListener('click', () => { items.splice(items.indexOf(it), 1); card.remove(); items.forEach(o => { if (o.res && o.state !== 'saved') { o.state = classify(o); draw(o); } }); refresh(); });
+    head.append(title, x); card.append(head);
+
+    if (it.state === 'reading') return;
+    if (!it.res) { const w = el('ul', 'warns block'); w.append(el('li', '', it.error)); card.append(w); return; }
+    const r = it.res;
+
+    const dl = el('dl', 'f');
+    const fld = (label, value, cls) => { const d = el('div', cls); d.append(el('dt', '', label)); const dd = el('dd'); if (value instanceof Node) dd.append(value); else dd.textContent = value || '-'; d.append(dd); dl.append(d); return dd; };
+    fld('เลขที่ใบรับรอง (Reference No.)', r.ref);
+    fld('วันที่ออกใบรับรอง', r.issued);
+    fld('บริษัทลูกค้า', r.client);
+    fld('จำนวนรวม (Total Quantity)', r.totalCartons ? fmtN(r.totalCartons) + ' กล่อง' : '-');
+    fld('วันที่ฉายรังสี', r.irrDate);
+    fld('Dose ต่ำสุด – สูงสุด (kGy)', r.minDose || r.maxDose ? (r.minDose || '-') + ' – ' + (r.maxDose || '-') : '-');
+    // Job No. แก้ไขได้ เผื่อไฟล์เขียนไม่ตรงกับในระบบ
+    const jobBox = el('div');
+    const jin = el('input'); jin.type = 'text'; jin.value = it.jobsText; jin.disabled = it.state === 'saving' || it.state === 'saved';
+    jin.setAttribute('aria-label', 'Job No. ของ ' + it.file.name);
+    const chips = el('div', 'jobchips');
+    const paintJobs = () => { chips.innerHTML = ''; if (it.jobs.length) it.jobs.forEach(j => chips.append(el('span', '', j))); else chips.append(el('em', '', 'ยังไม่มี Job No.')); };
+    paintJobs();
+    jin.addEventListener('input', () => {
+      it.jobsText = jin.value.trim(); it.jobs = CertParse.expandJobs(it.jobsText); paintJobs();
+      const before = it.state; it.state = classify(it);
+      if (before !== it.state) { const pos = jin.selectionStart; draw(it); refresh(); const n = it.el.querySelector('.jobs input'); n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} }
+      else refresh();
+    });
+    jobBox.append(jin, chips);
+    fld('Job No. (Irradiation Job No.) แยกหลาย Job ด้วย , หรือ -', jobBox, 'wide jobs');
+    card.append(dl);
+
+    const p = problems(it);
+    if (p.block.length) { const u = el('ul', 'warns block'); p.block.forEach(t => u.append(el('li', '', t))); card.append(u); }
+    if (p.warn.length) { const u = el('ul', 'warns'); p.warn.forEach(t => u.append(el('li', '', t))); card.append(u); }
+
+    if (r.lots.length) {
+      const det = el('details', 'lots');
+      const s = el('summary');
+      s.append('รายการ Lot ' + r.lots.length + ' รายการ · รวม ' + fmtN(r.sumCartons) + ' กล่อง ');
+      if (r.totalCartons) s.append(r.sumCartons === r.totalCartons ? el('span', 'chk-ok', '✓ ตรงกับ Total') : el('span', 'chk-bad', '✗ ไม่ตรงกับ Total ' + fmtN(r.totalCartons)));
+      det.append(s);
+      const multi = new Set(r.lots.map(l => l.product)).size > 1;
+      const wrap = el('div', 'tbl'), t = el('table'), th = el('thead'), hr = el('tr');
+      hr.append(el('th', 'i', '#')); if (multi) hr.append(el('th', '', 'สินค้า')); hr.append(el('th', '', 'เลข Lot'), el('th', 'n', 'กล่อง'));
+      th.append(hr); t.append(th);
+      const tb = el('tbody');
+      r.lots.forEach((l, i) => { const tr = el('tr'); tr.append(el('td', 'i', String(i + 1))); if (multi) tr.append(el('td', '', l.product || '-')); tr.append(el('td', '', l.lot || '—'), el('td', 'n', fmtN(l.cartons))); tb.append(tr); });
+      t.append(tb);
+      const tf = el('tfoot'), fr = el('tr'), ft = el('td', '', 'รวม'); ft.colSpan = multi ? 3 : 2; fr.append(ft, el('td', 'n', fmtN(r.sumCartons))); tf.append(fr); t.append(tf);
+      if (!multi && r.lots[0] && r.lots[0].product) { const cap = el('caption', '', 'สินค้า: ' + r.lots[0].product); cap.style.cssText = 'caption-side:top;text-align:left;padding:8px 12px;font-size:13.5px;color:var(--ink-2)'; t.prepend(cap); }
+      wrap.append(t); det.append(wrap); card.append(det);
+    }
+
+    if (p.warn.length && !p.block.length && it.state !== 'saved') {
+      const a = el('label', 'ack'), cb = el('input'); cb.type = 'checkbox'; cb.checked = it.ack; cb.disabled = it.state === 'saving';
+      cb.addEventListener('change', () => { it.ack = cb.checked; refresh(); btn.disabled = !canSave(it); });
+      a.append(cb, el('span', '', 'ตรวจกับไฟล์ PDF แล้ว ข้อมูลถูกต้อง บันทึกได้'));
+      card.append(a);
+    }
+
+    const foot = el('div', 'card-f');
+    const msg = el('div', 'msg');
+    if (it.result) {
+      const d = it.result;
+      if (d.ok) {
+        msg.className = 'msg ok';
+        msg.append(el('div', '', (d.mode === 'updated' ? 'บันทึกทับข้อมูลเดิม' : 'เพิ่มใหม่') + ' ในแท็บ Certs แถวที่ ' + d.row));
+        if (d.missingJobs && d.missingJobs.length) {
+          const w = el('div', 'res'); w.style.color = 'var(--warn)';
+          w.textContent = 'Job ' + d.missingJobs.join(', ') + ' ยังไม่มีในแท็บ Jobs/Fruit เลข Lot จะขึ้นในหน้าฉลากเมื่อเพิ่มงานนี้แล้ว';
+          msg.append(w);
+        }
+      } else { msg.className = 'msg err'; msg.textContent = d.notice || 'บันทึกไม่สำเร็จ'; }
+    }
+    const btn = el('button', 'btn primary', it.state === 'saved' ? 'บันทึกอีกครั้ง' : 'บันทึก'); btn.type = 'button';
+    btn.disabled = it.state === 'saved' ? false : !canSave(it);
+    if (it.state === 'saved') btn.className = 'btn';
+    btn.addEventListener('click', () => save(it));
+    foot.append(msg, btn); card.append(foot);
+  }
+
+  async function save(it){
+    const key = needKey(); if (!key) return false;
+    const r = it.res;
+    const cert = { ref: r.ref, issued: r.issued, jobText: it.jobsText, jobs: it.jobs, client: r.client, totalCartons: r.totalCartons,
+      lots: r.lots.map(l => ({ lot: l.lot, cartons: l.cartons, product: l.product })) };
+    it.state = 'saving'; it.result = null; draw(it); refresh();
+    try {
+      const d = await post({ action: 'saveCert', key, cert });
+      it.result = d;
+      it.state = d.ok ? 'saved' : 'failed';
+      if (!d.ok && /รหัส/.test(d.notice || '')) say(keyMsg, d.notice, 'err');
+    } catch (e) {
+      it.result = { ok: false, notice: e.message && /ระบบ/.test(e.message) ? e.message : 'ติดต่อระบบไม่ได้ ตรวจอินเทอร์เน็ตแล้วลองอีกครั้ง' };
+      it.state = 'failed';
+    }
+    draw(it); refresh();
+    return it.state === 'saved';
+  }
+
+  saveAll.addEventListener('click', async () => {
+    if (!needKey()) return;
+    saveAll.disabled = true;
+    for (const it of items.slice()) {
+      if (it.state === 'saved' || !canSave(it)) continue;
+      const ok = await save(it);
+      if (!ok && it.result && /รหัส|CERT_KEY/.test(it.result.notice || '')) break;   // รหัสผิด หยุดทั้งชุด
+    }
+    refresh();
+  });
+  $('clear').addEventListener('click', () => {
+    if (items.some(it => it.state === 'saving')) return;
+    items.length = 0; list.innerHTML = ''; refresh();
+  });
+
+  function refresh(){
+    bar.hidden = !items.length;
+    const n = s => items.filter(it => it.state === s).length;
+    const ready = items.filter(it => it.state !== 'saved' && canSave(it)).length;
+    sum.innerHTML = '';
+    sum.append(el('b', '', items.length + ' ไฟล์'), ' · พร้อมบันทึก ' + ready + ' · บันทึกแล้ว ' + n('saved'));
+    const waiting = items.filter(it => it.state === 'warn' && !it.ack).length;
+    if (waiting) sum.append(' · รอยืนยัน ' + waiting);
+    if (n('error') + n('failed')) sum.append(' · มีปัญหา ' + (n('error') + n('failed')));
+    saveAll.disabled = !ready || items.some(it => it.state === 'saving' || it.state === 'reading');
+    saveAll.textContent = ready ? 'บันทึกทั้งหมด (' + ready + ')' : 'บันทึกทั้งหมด';
+  }
+})();
+</script>
+</body>
+</html>

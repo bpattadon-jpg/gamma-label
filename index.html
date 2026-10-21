@@ -167,6 +167,35 @@ p{margin:0}
 .sticker > svg{display:block;width:100%;height:auto}
 .sticker.portrait{max-width:440px}
 .lbl-wrap .lbl-foot{border-top:0;margin-top:16px;text-align:left}
+/* ใบรับรองการฉายรังสี + เลข Lot (ใต้ภาพสติ๊กเกอร์) */
+.lbl-cert{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px}
+.lbl-cert h3{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;line-height:1.35}
+.lbl-cert h3 svg{width:20px;height:20px;flex-shrink:0;color:var(--blue)}
+.cert-req{margin-top:8px;font-size:15.5px}
+.cert-req b{font-weight:700}
+.cert-wait{margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--paper);font-size:14.5px;color:var(--ink-2)}
+.cert-item{margin-top:14px;padding-top:14px;border-top:1px solid #EEF2F8}
+.cert-meta{font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+.cert-meta b{color:var(--ink);font-weight:600;overflow-wrap:anywhere}
+.cert-item details{margin-top:10px}
+.cert-item summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;font-size:14.5px;font-weight:600;color:var(--blue);background:#fff}
+.cert-item summary::-webkit-details-marker{display:none}
+.cert-item summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.cert-item details[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.cert-item summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.cert-prod{margin-top:12px;font-size:14px;color:var(--ink-2)}
+.cert-prod b{color:var(--ink);font-weight:600}
+.cert-find{display:block;width:100%;margin-top:10px;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:15px;color:var(--ink);background:#fff}
+.cert-find:focus{outline:none;border-color:var(--blue)}
+.cert-lots{margin-top:10px;max-height:420px;overflow:auto;border:1px solid #EEF2F8;border-radius:12px;-webkit-overflow-scrolling:touch}
+.cert-lots table{width:100%;border-collapse:collapse;font-size:14.5px}
+.cert-lots th{position:sticky;top:0;z-index:1;padding:8px 12px;background:#F7F9FC;text-align:left;font-size:13.5px;font-weight:600;color:var(--ink-2)}
+.cert-lots td{padding:7px 12px;border-top:1px solid #EEF2F8;overflow-wrap:anywhere}
+.cert-lots .n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cert-lots .i{width:1%;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.cert-lots tr.grp td{background:#FBFCFE;font-weight:600;color:var(--ink)}
+.cert-lots tfoot td{border-top:1.5px solid var(--line);font-weight:700}
+.cert-none{padding:12px;font-size:14px;color:var(--ink-2)}
 [hidden]{display:none !important}
 
 /* ---------- HERO ---------- */
@@ -561,6 +590,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
         <span class="lbl-count" id="lblOf"></span>
       </div>
       <div class="sticker" id="sticker"></div>
+      <section class="lbl-cert" id="lblCert" aria-labelledby="lblCertH" hidden>
+        <h3 id="lblCertH"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>ใบรับรองการฉายรังสี (Certificate)</h3>
+        <p class="cert-req" id="certReq" hidden></p>
+        <div id="certList"></div>
+        <p class="cert-wait" id="certWait" hidden>ข้อมูลเลข Lot และจำนวนกล่องของแต่ละ Lot จะแสดงที่นี่หลังออกใบรับรอง</p>
+      </section>
       <p class="lbl-foot">ข้อมูลไม่ตรงกับฉลากบนกล่อง โทร <a href="tel:+6624019889,6101" target="_top">02 401 9889 ต่อ 6101–6103</a></p>
     </article>
     <div class="lbl lbl-loading" id="lblLoading" role="status" hidden>
@@ -1032,6 +1067,104 @@ function render(L){
   }
 
   drawSticker(L, type);
+  renderCert(L);
+}
+
+/* ---------- ใบรับรอง: จำนวนกล่องที่ขอ + เลข Lot จากใบรับรอง ---------- */
+function el(tag, cls, text){
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+const fmtN = n => Number(n || 0).toLocaleString('en-US');
+function renderCert(L){
+  const sec = document.getElementById('lblCert');
+  const req = document.getElementById('certReq');
+  const list = document.getElementById('certList');
+  const wait = document.getElementById('certWait');
+  const cq = L.certQty;
+  const certs = Array.isArray(L.certs) ? L.certs.filter(c => c && Array.isArray(c.lots)) : [];
+  list.innerHTML = '';
+  if (!cq && !certs.length) { sec.hidden = true; return; }
+
+  req.hidden = !cq;
+  if (cq) {
+    req.textContent = '';
+    req.append('ขอใบรับรอง ');
+    if (cq.all) { req.append(el('b', '', 'ทุกกล่อง')); req.append(' (' + fmtN(L.quantity) + ' กล่อง)'); }
+    else { req.append(el('b', '', fmtN(cq.boxes) + ' กล่อง')); req.append(' จาก ' + fmtN(L.quantity) + ' กล่อง'); }
+  }
+  wait.hidden = certs.length > 0;
+
+  certs.forEach((c, ci) => {
+    const item = el('div', 'cert-item');
+    const meta = el('p', 'cert-meta');
+    meta.append('เลขที่ ', el('b', '', c.ref || '-'));
+    if (c.issued) meta.append(' · ออกวันที่ ', el('b', '', c.issued));
+    // ใบรับรองใบเดียวอาจครอบคลุมหลาย Job (เช่น 12095.1-12095.2) แสดงให้ลูกค้าเห็นว่ายอดรวมมาจากทุก Job
+    if (c.jobText && String(c.jobText) !== String(L.jobNo)) {
+      meta.append(el('br'), 'ครอบคลุม Job No. ', el('b', '', c.jobText));
+    }
+    item.append(meta);
+
+    const lots = c.lots;
+    const total = lots.reduce((a, r) => a + (Number(r.cartons) || 0), 0);
+    const det = el('details');
+    if (certs.length === 1 && lots.length <= 6) det.open = true;
+    det.append(el('summary', '', 'ดูเลข Lot (' + lots.length + ' รายการ · ' + fmtN(total) + ' กล่อง)'));
+
+    const products = Array.from(new Set(lots.map(r => (r.product || '').trim()).filter(Boolean)));
+    if (products.length === 1) {
+      const p = el('p', 'cert-prod'); p.append('สินค้า ', el('b', '', products[0])); det.append(p);
+    }
+    let find = null;
+    if (lots.length > 12) {
+      find = el('input', 'cert-find');
+      find.type = 'search'; find.placeholder = 'ค้นหาเลข Lot'; find.autocomplete = 'off';
+      find.setAttribute('aria-label', 'ค้นหาเลข Lot ในใบรับรอง ' + (c.ref || ''));
+      det.append(find);
+    }
+
+    const wrap = el('div', 'cert-lots');
+    const tbl = el('table');
+    const th = el('thead'), hr = el('tr');
+    hr.append(el('th', 'i', '#'), el('th', '', 'เลข Lot'), el('th', 'n', 'จำนวนกล่อง'));
+    th.append(hr); tbl.append(th);
+    const tb = el('tbody');
+    let lastProd = null, i = 0;
+    lots.forEach(r => {
+      const prod = (r.product || '').trim();
+      if (products.length > 1 && prod !== lastProd) {
+        const g = el('tr', 'grp'), td = el('td', '', prod || 'ไม่ระบุสินค้า');
+        td.colSpan = 3; g.append(td); tb.append(g); lastProd = prod;
+      }
+      const tr = el('tr');
+      tr.dataset.lot = String(r.lot || '').toLowerCase();
+      tr.append(el('td', 'i', String(++i)), el('td', '', r.lot || '-'), el('td', 'n', fmtN(r.cartons)));
+      tb.append(tr);
+    });
+    tbl.append(tb);
+    const tf = el('tfoot'), fr = el('tr'), ft = el('td', '', 'รวม');
+    ft.colSpan = 2; fr.append(ft, el('td', 'n', fmtN(total))); tf.append(fr); tbl.append(tf);
+    wrap.append(tbl);
+    const none = el('p', 'cert-none', 'ไม่พบเลข Lot ที่ค้นหา'); none.hidden = true; wrap.append(none);
+    det.append(wrap);
+
+    if (find) find.addEventListener('input', () => {
+      const s = find.value.trim().toLowerCase().replace(/\s+/g, '');
+      let shown = 0;
+      tb.querySelectorAll('tr').forEach(tr => {
+        if (tr.classList.contains('grp')) { tr.hidden = !!s; return; }
+        const hit = !s || tr.dataset.lot.replace(/\s+/g, '').includes(s);
+        tr.hidden = !hit; if (hit) shown++;
+      });
+      tf.hidden = !!s; none.hidden = shown > 0;
+    });
+    item.append(det);
+    list.append(item);
+  });
+  sec.hidden = false;
 }
 
 /* ---------- sticker drawing: same layout as the NiceLabel designs ---------- */
