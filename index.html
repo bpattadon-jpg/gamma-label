@@ -162,6 +162,8 @@ p{margin:0}
 .lbl-wrap{width:100%;max-width:560px}
 .lbl-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;margin-bottom:12px}
 .lbl-top .lbl-status{margin-top:0}
+.lbl-tags{display:flex;flex-wrap:wrap;gap:8px}
+.lbl-status.cert{background:#FFF4D9;color:#7A4E00}
 .lbl-count{font-size:14.5px;color:var(--ink-2)}
 .sticker{background:#fff;border:1.5px solid #1b1b1b;border-radius:10px;box-shadow:6px 7px 0 #1b1b1b;overflow:hidden}
 .sticker > svg{display:block;width:100%;height:auto}
@@ -586,7 +588,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   <div class="wrap lbl-grid">
     <article class="lbl-wrap" id="lblCard" hidden>
       <div class="lbl-top">
-        <div class="lbl-status" id="lblStatus" hidden></div>
+        <div class="lbl-tags">
+          <div class="lbl-status" id="lblStatus" hidden></div>
+          <div class="lbl-status cert" id="lblCertTag" hidden></div>
+        </div>
         <span class="lbl-count" id="lblOf"></span>
       </div>
       <div class="sticker" id="sticker"></div>
@@ -1083,17 +1088,24 @@ function renderCert(L){
   const req = document.getElementById('certReq');
   const list = document.getElementById('certList');
   const wait = document.getElementById('certWait');
-  const cq = L.certQty && !L.certQty.none && Number(L.certQty.boxes) > 0 ? L.certQty : null;   // ไม่ขอใบรับรอง = ไม่แสดงบรรทัดนี้
-  const certs = Array.isArray(L.certs) ? L.certs.filter(c => c && Array.isArray(c.lots)) : [];
+  const tag = document.getElementById('lblCertTag');
+  // ขอทุกกล่อง = ทุกกล่องขึ้น "ขอใบรับรองทั้งหมด"
+  // ขอบางกล่อง (N กล่อง) = เฉพาะกล่องที่ 1..N ขึ้น "กล่องนี้ขอใบรับรอง" กล่องที่เหลือไม่ขึ้นอะไร เหมือนไม่ได้ขอ
+  const raw = L.certQty;
+  const all = !!(raw && (raw.all || Number(raw.boxes) >= Number(L.quantity)));
+  const cq = raw && !raw.none && Number(raw.boxes) > 0 && (all || Number(L.box) <= Number(raw.boxes)) ? raw : null;
+  const certs = (raw && !cq) ? [] : Array.isArray(L.certs) ? L.certs.filter(c => c && Array.isArray(c.lots)) : [];
   list.innerHTML = '';
+  tag.hidden = !cq;
   if (!cq && !certs.length) { sec.hidden = true; return; }
 
   req.hidden = !cq;
   if (cq) {
+    tag.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/></svg>';
+    tag.append(all ? 'ขอใบรับรองทั้งหมด' : 'กล่องนี้ขอใบรับรอง');
     req.textContent = '';
-    req.append('ขอใบรับรอง ');
-    if (cq.all) { req.append(el('b', '', 'ทุกกล่อง')); req.append(' (' + fmtN(L.quantity) + ' กล่อง)'); }
-    else { req.append(el('b', '', fmtN(cq.boxes) + ' กล่อง')); req.append(' จาก ' + fmtN(L.quantity) + ' กล่อง'); }
+    if (all) { req.append(el('b', '', 'ขอใบรับรองทั้งหมด')); req.append(' (' + fmtN(L.quantity) + ' กล่อง)'); }
+    else { req.append(el('b', '', 'กล่องนี้ขอใบรับรอง')); req.append(' (ขอกล่องที่ 1–' + fmtN(raw.boxes) + ' จาก ' + fmtN(L.quantity) + ' กล่อง)'); }
   }
   wait.hidden = certs.length > 0;
 
