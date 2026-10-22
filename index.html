@@ -401,6 +401,7 @@ section{position:relative}
 .ph .ph-art{position:absolute;inset:0;display:grid;place-items:center;color:rgba(143,227,255,.75)}
 .ph .ph-art svg{width:34%;max-width:120px;height:auto}
 .ph.has-photo .ph-art{display:none}
+.ph[data-photo="building"].has-photo{background-position:50% 78%}
 .ph figcaption{
   position:absolute;left:0;right:0;bottom:0;padding:28px 14px 12px;font-size:14px;font-weight:500;color:#fff;
   background:linear-gradient(transparent,rgba(7,23,51,.82));
@@ -1002,7 +1003,7 @@ window.CERTS = {
   }
 };
 window.PHOTOS = {
-  building:  '',
+  building:  'photos/building.webp',
   control:   '',
   carrier:   '',
   dosimetry: '',
